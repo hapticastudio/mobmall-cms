@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   private
 
   def require_admin
-    redirect_to root_url, :alert => "You don't have permission to visit this page" unless current_user.admin?
+    not_authorised unless current_user.admin?
+  end
+
+  def not_authorised
+    redirect_to root_url, :alert => "You don't have permission to visit this page"
   end
 
   def not_authenticated

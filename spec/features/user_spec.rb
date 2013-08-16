@@ -22,6 +22,61 @@ describe "user" do
     end
   end
 
+  context "edit" do
+    it "should show 'Edit account' link when logged in" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      page.should have_link("Edit account")
+    end
+
+    it "should visit edit_user_path on 'Edit account' link" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      click_link "Edit account"
+      current_path.should == edit_user_path(user)
+    end
+
+    it "should allow user to his own edit page" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      visit edit_user_path(user)
+      current_path.should == edit_user_path(user)
+    end
+
+    it "should not allow user to strager edit page" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      visit edit_user_path(FactoryGirl.create(:user))
+      current_path.should == panel_index_path
+    end
+
+    it "Should redirect to panel on successfull password update" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      visit edit_user_path(user)
+      fill_in "Password", with: "New password"
+      fill_in "Password confirmation", with: "New password"
+      click_button "Update User"
+      page.should have_content("Account updated successfully")
+      current_path.should == panel_index_path
+    end
+
+    it "should be able to login with new password" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      visit edit_user_path(user)
+      fill_in "Password", with: "New password"
+      fill_in "Password confirmation", with: "New password"
+      click_button "Update User"
+      click_link "Log out"
+      
+      fill_in "Email", with: user.email
+      fill_in "Password", with: "New password"
+      click_button "Login"
+      current_path.should == panel_index_path
+    end
+  end
+
   context "new" do
     it "should not pass unauthenticated user" do
       visit new_user_path

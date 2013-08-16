@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_login
-  before_filter :require_admin
+  before_filter :require_admin, except: [:edit, :update]
 
   def index
     @users = User.all
@@ -21,8 +21,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(id_params[:id])
+    not_authorised unless @user == current_user
+  end
+
+  def update
+    @user = User.find(id_params[:id])
+    not_authorised unless @user == current_user
+    if @user.update_attributes(password_params)
+      redirect_to panel_index_path, notice: "Account updated successfully"
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    @user = User.find(destroy_params[:id])
+    @user = User.find(id_params[:id])
     @user.destroy if @user
     redirect_to users_path, notice: "User #{@user.email} successfully removed"
   end
@@ -33,7 +48,11 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email)
   end
 
-  def destroy_params
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def id_params
     params.permit(:id)
   end
 end
