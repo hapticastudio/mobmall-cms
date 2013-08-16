@@ -19,6 +19,13 @@ describe "login" do
     current_path.should == panel_index_path
   end
 
+  it "allows to log out" do
+    user = FactoryGirl.create(:user)
+    login(user)
+    click_link "Log out"
+    page.should have_content("Logged out!")
+  end
+
   private
 
   def login(user = InvalidUser.new)
