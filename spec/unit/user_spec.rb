@@ -31,4 +31,14 @@ describe User do
       FactoryGirl.create(:user).password_present?.should be_true
     end
   end
+
+  context "title" do
+    it "returns 'admin' if the role is admin" do
+      FactoryGirl.build(:admin).title.should == "admin"
+    end
+
+    it "returns 'moderator' if there is no role" do
+      FactoryGirl.build(:user).title.should == 'moderator'
+    end
+  end
 end

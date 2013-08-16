@@ -12,4 +12,12 @@ class User < ActiveRecord::Base
   def password_present?
     crypted_password.present?
   end
+
+  def title
+    if admin?
+      "admin"
+    else
+      "moderator"
+    end
+  end
 end

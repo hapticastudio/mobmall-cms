@@ -1,1 +1,6 @@
-This is moderator/admin panel.
+Welcome in <%= current_user.title %> panel.
+<div>
+  <% if current_user.admin? %>
+    <%= link_to "New user", new_user_path %>
+  <% end %>
+</div>
