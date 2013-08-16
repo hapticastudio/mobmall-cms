@@ -1,0 +1,13 @@
+Listing Users
+
+<table>
+  <td>Email</td>
+  <td>Admin</td>
+  
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.admin? %></td>
+    </tr>
+  <% end %>
+</table>

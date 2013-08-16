@@ -30,4 +30,14 @@ describe "panel" do
       page.should_not have_link("New user")
     end
   end
+
+  context 'Users list' do
+    it "should follow to users_path" do
+      user = FactoryGirl.create(:admin)
+      login(user)
+      visit panel_index_path
+      click_link("Users list")
+      current_path.should == users_path
+    end
+  end
 end

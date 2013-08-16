@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe "user" do
+  context "index" do
+    it "should not pass unauthenticated user" do
+      visit users_path
+      page.should have_content("Login to access this page")
+    end
+
+    it "should not pass non-admin users" do
+      user = FactoryGirl.create(:user)
+      login(user)
+      visit users_path
+      page.should have_content("You don't have permission to visit this page")
+    end
+
+    it "should allow admins" do
+      user = FactoryGirl.create(:admin)
+      login(user)
+      visit users_path
+      current_path.should == users_path
+    end
+  end
+
   context "new" do
     it "should not pass unauthenticated user" do
       visit new_user_path
