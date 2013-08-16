@@ -11,4 +11,12 @@ describe User do
     user.valid?
     assert user.errors.messages[:password_confirmation].include?("doesn't match Password")
   end
+
+  it "should not be admin by default" do
+    FactoryGirl.build(:user).admin?.should be_false
+  end
+
+  it "should be admin with proper role set" do
+    FactoryGirl.build(:admin).admin?.should be_true
+  end
 end
