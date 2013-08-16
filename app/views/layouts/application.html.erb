@@ -7,6 +7,11 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <nav>
+      <% if logged_in? %>
+        Logged in as <%= current_user.email %>
+      <% end %>
+    </nav>
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
