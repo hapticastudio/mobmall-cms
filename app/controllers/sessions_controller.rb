@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    redirect_to panel_index_path if logged_in?
   end
 
   def create
