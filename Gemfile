@@ -8,8 +8,11 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 
+gem 'sorcery'
+
 group :test do
   gem "rspec-rails"
+  gem "capybara"
 end
 
 
