@@ -16,12 +16,13 @@ group :test do
   gem "factory_girl_rails"
 end
 
+group :development do
+  gem 'quiet_assets'
+end
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
