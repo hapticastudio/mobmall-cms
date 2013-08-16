@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_filter :require_login
   before_filter :require_admin
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
@@ -17,13 +21,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
+  def destroy
+    @user = User.find(destroy_params[:id])
+    @user.destroy if @user
+    redirect_to users_path, notice: "User #{@user.email} successfully removed"
   end
 
   private
 
   def user_params
     params.require(:user).permit(:email)
+  end
+
+  def destroy_params
+    params.permit(:id)
   end
 end

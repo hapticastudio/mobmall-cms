@@ -13,9 +13,11 @@ gem 'sorcery'
 group :test do
   gem "rspec-rails"
   gem "capybara"
+  gem "capybara-webkit"
   gem "factory_girl_rails"
   gem "shoulda"
   gem "database_cleaner", '1.0.1'
+  gem "prickle"
 end
 
 group :development do

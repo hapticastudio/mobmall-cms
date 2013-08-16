@@ -82,4 +82,30 @@ describe "user" do
       User.last.password_present?.should be_false
     end
   end
+
+  context "destroy", js: true do
+    it "admin should be able to remove user" do
+      user = FactoryGirl.create(:admin)
+      login(user)
+      user_to_delete = FactoryGirl.create(:user)
+      visit users_path
+      popup.confirm {
+        click_link "Delete"
+      }
+      sleep 0.1
+      User.count.should == 1
+    end
+
+    it "does not remove user if confirmation is dismissed" do
+      user = FactoryGirl.create(:admin)
+      login(user)
+      user_to_delete = FactoryGirl.create(:user)
+      visit users_path
+      popup.dismiss {
+        click_link "Delete"
+      }
+      sleep 0.1
+      User.count.should == 2
+    end
+  end
 end
