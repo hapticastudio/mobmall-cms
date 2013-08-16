@@ -12,11 +12,23 @@ describe User do
     assert user.errors.messages[:password_confirmation].include?("doesn't match Password")
   end
 
-  it "should not be admin by default" do
-    FactoryGirl.build(:user).admin?.should be_false
+  context "admin?" do
+    it "returns false if role is not 'admin" do
+      FactoryGirl.build(:user).admin?.should be_false
+    end
+
+    it "returns true if role is 'admin" do
+      FactoryGirl.build(:admin).admin?.should be_true
+    end
   end
 
-  it "should be admin with proper role set" do
-    FactoryGirl.build(:admin).admin?.should be_true
+  context "password_present?" do
+    it "returns false if crypted_password is not saved" do
+      User.new.password_present?.should be_false
+    end
+
+    it "returns true if crypted_password is saved" do
+      FactoryGirl.create(:user).password_present?.should be_true
+    end
   end
 end

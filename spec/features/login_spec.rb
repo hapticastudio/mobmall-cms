@@ -25,13 +25,4 @@ describe "login" do
     click_link "Log out"
     page.should have_content("Logged out!")
   end
-
-  private
-
-  def login(user = InvalidUser.new)
-    visit root_url
-    fill_in "Email", with: user.email
-    fill_in "Password", with: "secret"
-    click_button "Login"
-  end
 end

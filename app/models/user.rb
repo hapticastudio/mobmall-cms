@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   def admin?
     role == "admin"
   end
+
+  def password_present?
+    crypted_password.present?
+  end
 end
