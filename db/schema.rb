@@ -25,6 +25,6 @@ ActiveRecord::Schema.define(version: 20130816175634) do
     t.string   "role"
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
 end

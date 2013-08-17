@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
-gem 'sqlite3'
+gem 'pg'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
-
 gem 'sorcery'
 
 group :test do
+  gem 'sqlite3'
   gem "rspec-rails"
   gem "capybara"
   gem "capybara-webkit"
@@ -23,7 +23,6 @@ end
 group :development do
   gem 'quiet_assets'
 end
-
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
