@@ -12,6 +12,22 @@ describe User do
     assert user.errors.messages[:password_confirmation].include?("doesn't match Password")
   end
 
+  context "promote" do
+    it "sets role to admin" do
+      user = FactoryGirl.build(:user)
+      user.promote!
+      user.role.should == "admin"
+    end
+  end
+
+  context "degrade" do
+    it "sets role to nil" do
+      user = FactoryGirl.build(:admin)
+      user.degrade!
+      user.role.should == nil
+    end
+  end
+
   context "admin?" do
     it "returns false if role is not 'admin" do
       FactoryGirl.build(:user).admin?.should be_false

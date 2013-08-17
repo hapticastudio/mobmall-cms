@@ -21,6 +21,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def promote
+    @user = User.find(id_params[:id])
+    @user.promote! 
+    redirect_to users_path
+  end
+
+  def degrade
+    @user = User.find(id_params[:id])
+    @user.degrade! 
+    redirect_to users_path
+  end
+
   def edit
     @user = User.find(id_params[:id])
     not_authorised unless @user == current_user

@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe "user" do
+  context "admin rights" do
+    it "allows promoting to admin" do
+      user = FactoryGirl.create(:admin)
+      login(user)
+      another_user = FactoryGirl.create(:user)
+      visit users_path
+      click_button "Promote"
+      another_user.reload.admin?.should be_true
+    end
+
+    it "allows degrading to moderator" do
+      user = FactoryGirl.create(:admin)
+      login(user)
+      another_user = FactoryGirl.create(:admin)
+      visit users_path
+      click_button "Degrade"
+      another_user.reload.admin?.should be_false
+    end
+  end
+
   context "index" do
     it "should not pass unauthenticated user" do
       visit users_path

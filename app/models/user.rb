@@ -20,4 +20,12 @@ class User < ActiveRecord::Base
       "moderator"
     end
   end
+
+  def promote!
+    update_attribute(:role, 'admin')
+  end
+
+  def degrade!
+    update_attribute(:role, nil)
+  end
 end
