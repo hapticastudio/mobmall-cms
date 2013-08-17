@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'sorcery'
+gem 'zurb-foundation'
 
 group :production do
   gem 'rails_12factor'
@@ -26,6 +27,7 @@ end
 
 group :development do
   gem 'quiet_assets'
+  gem 'guard-livereload'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

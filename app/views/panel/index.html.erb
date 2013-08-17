@@ -1,7 +1,6 @@
-Welcome in <%= current_user.title %> panel.
-<div>
+<div class="row small-3">
   <% if current_user.admin? %>
-    <%= link_to "New user", new_user_path %>
-    <%= link_to "Users list", users_path %>
+    <%= link_to "New user", new_user_path, class: "button expand" %>
+    <%= link_to "Users list", users_path, class: "button expand" %>
   <% end %>
 </div>

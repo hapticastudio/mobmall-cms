@@ -1,7 +1,7 @@
-<%= form_tag password_resets_path, :method => :post do %>
-  <div class="field">
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-    <%= submit_tag "Reset my password!" %>
-  </div>
-<% end %>
+<div class="row small-3">
+<h1 class="text-center">Reset password</h1>
+  <%= form_tag password_resets_path, :method => :post do %>
+    <%= text_field_tag :email, nil, placeholder: "Write your email" %>
+    <%= submit_tag "Send reset password email!", class: "button expand" %>
+  <% end %>
+</div>

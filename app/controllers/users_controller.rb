@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_admin, except: [:edit, :update]
 
   def index
-    @users = User.all
+    @users = User.ordered
   end
 
   def new

@@ -27,7 +27,7 @@ describe "reset password" do
     visit edit_password_reset_path(user.reset_password_token)
     fill_in "Password", with: "new_password"
     fill_in "Password confirmation", with: "new_password"
-    click_button "Update User"
+    click_button "Update password"
 
     fill_in "Email", with: user.email
     fill_in "Password", with: "new_password"
@@ -40,7 +40,7 @@ describe "reset password" do
 
   def send_password_email(user = InvalidUser.new)
     visit new_password_reset_path
-    fill_in "Email", with: user.email
-    click_button "Reset my password!"
+    fill_in :email, with: user.email
+    click_button "Send reset password email"
   end
 end

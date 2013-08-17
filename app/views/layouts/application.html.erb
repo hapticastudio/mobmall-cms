@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-    <title>MobMall</title>
+  	<meta charset="utf-8" />
+
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title>MobMall</title>
+
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
+
   <body>
-    <nav>
-      <% if logged_in? %>
-        Logged in as <%= current_user.email %>
-        <%= link_to "Home", root_path %>
-        <%= link_to "Log out", logout_path %>
-        <%= link_to "Edit account", edit_user_path(current_user) %>
-      <% end %>
-    </nav>
+    <% if logged_in? %>
+      <nav class="top-bar">
+        <ul class="title-area">
+          <li class="name">
+            <h1><%= link_to "Mobmall", root_path %></h1>
+          </li>
+        </ul>
+
+        <span class="white">Logged in as <%= current_user.email %>, <%= current_user.title%>.</span>
+
+        <section class="top-bar-section right">
+          <ul>
+            <li class="divider"></li>
+            <li><%= link_to "Edit account", edit_user_path(current_user) %></li>
+            <li class="divider"></li>
+            <li><%= link_to "Log out", logout_path %></li>
+          </ul>
+        </section>
+      </nav>
+    <% end %>
+
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     <% end %>
-    <%= yield %> 
+
+    <%= yield %>
   </body>
 </html>
+

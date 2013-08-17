@@ -165,7 +165,7 @@ describe "user" do
       user_to_delete = FactoryGirl.create(:user)
       visit users_path
       popup.confirm {
-        click_link "Delete"
+        click_button "Delete"
       }
       sleep 0.1
       User.count.should == 1
@@ -177,7 +177,7 @@ describe "user" do
       user_to_delete = FactoryGirl.create(:user)
       visit users_path
       popup.dismiss {
-        click_link "Delete"
+        click_button "Delete"
       }
       sleep 0.1
       User.count.should == 2
