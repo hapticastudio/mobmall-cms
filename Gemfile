@@ -9,6 +9,10 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'sorcery'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 group :test do
   gem 'sqlite3'
   gem "rspec-rails"
