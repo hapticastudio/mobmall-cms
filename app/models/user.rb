@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
+  has_one :local
+
   scope :ordered,    -> { order(:id)       }
   scope :moderators, -> { where(role: nil) }
 

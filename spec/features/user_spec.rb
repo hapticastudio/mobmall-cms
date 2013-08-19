@@ -37,6 +37,15 @@ describe "user" do
       visit users_path
       current_path.should == users_path
     end
+
+    it "should follow to locals edit page via moderator name", focus: true do
+      user  = FactoryGirl.create(:user)
+      local = FactoryGirl.create(:local, moderator: user)
+      login_as_admin
+      visit users_path
+      click_link local.name
+      current_path.should == edit_local_path(local)
+    end
   end
 
   context "edit" do

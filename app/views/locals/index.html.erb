@@ -1,0 +1,19 @@
+<div class="row small-3">  
+  <h1 class="text-center">Listing Locals</h1>
+  <table>
+    <thead>
+      <td>Name</td>
+      <td>Moderator</td>
+      <td>Edit</td>
+    </thead>
+    <tbody>
+      <% @locals.each do |local| %>
+        <tr>
+          <td><%= local.name %></td>
+          <td><%= local.moderator_email %></td>
+          <td><%= link_to "Edit local", edit_local_path(local) %><td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

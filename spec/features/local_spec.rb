@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe "local" do
+  context "index" do
+    it "should allow admin via 'locals list' Link" do
+      login_as_admin
+      click_link "Locals list"
+      current_path.should == locals_path
+    end
+
+    it "should be able to click 'Edit' at locals" do
+      local = FactoryGirl.create(:local)
+      login_as_admin
+      visit locals_path
+      click_link "Edit local"
+      current_path.should == edit_local_path(local)
+    end
+  end
+
   context "create" do
     it "should allow admin to #new page via link" do
       login_as_admin

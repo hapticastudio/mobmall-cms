@@ -2,6 +2,10 @@ class LocalsController < ApplicationController
   before_filter :require_login
   before_filter :require_admin
   
+  def index
+    @locals = Local.all
+  end
+
   def new
     @local = Local.new
   end

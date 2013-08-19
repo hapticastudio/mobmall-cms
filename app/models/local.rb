@@ -4,6 +4,8 @@ class Local < ActiveRecord::Base
 
   validates_length_of :name, maximum: 50
 
+  delegate :email, to: :moderator, prefix: true, allow_nil: true
+
   def name
     content.name
   end
