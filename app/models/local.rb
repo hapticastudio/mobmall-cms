@@ -1,6 +1,6 @@
 class Local < ActiveRecord::Base
   has_many   :contents
-  belongs_to :user
+  belongs_to :moderator, class_name: "User", foreign_key: :user_id
 
   validates_length_of :name, maximum: 50
 

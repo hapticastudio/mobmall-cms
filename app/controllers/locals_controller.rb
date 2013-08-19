@@ -22,6 +22,7 @@ class LocalsController < ApplicationController
 
   def update
     @local = resource
+
     if @local.update_attributes(edit_params)
       redirect_to panel_index_path
     else

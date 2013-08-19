@@ -43,7 +43,7 @@ describe "local" do
         visit edit_local_path(local)
         select user.email, from: "local_user_id"
         click_button "Update Local"
-        local.reload.user.should == user
+        local.reload.moderator.should == user
       end
     end
   end
