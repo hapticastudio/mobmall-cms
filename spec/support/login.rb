@@ -4,3 +4,7 @@ def login(user = InvalidUser.new)
   fill_in "Password", with: "secret"
   click_button "Login"
 end
+
+def login_as_admin
+  login(FactoryGirl.create(:admin))
+end

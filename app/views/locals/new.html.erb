@@ -1,0 +1,18 @@
+<div class="row small-3">
+  <h1 class="text-center">Create new local</h1>
+  <%= form_for @local do |f| %>
+    <% if @local.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @local.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <%= f.text_field :name, placeholder: "Name" %>
+    <%= f.submit nil, class: "button expand" %>
+  <% end %>
+</div>

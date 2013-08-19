@@ -8,6 +8,8 @@ MobMall::Application.routes.draw do
       patch :degrade
     end
   end
+
+  resources :locals, only: [:new, :create]
   
   get "logout" => "sessions#destroy", :as => "logout"
 

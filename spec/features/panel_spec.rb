@@ -9,15 +9,13 @@ describe "panel" do
 
   context "new user" do
     it "should show link to admin" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit panel_index_path
       page.should have_link("New user")
     end
 
     it "should follow to new_user_path" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit panel_index_path
       click_link("New user")
       current_path.should == new_user_path
@@ -33,8 +31,7 @@ describe "panel" do
 
   context 'Users list' do
     it "should follow to users_path" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit panel_index_path
       click_link("Users list")
       current_path.should == users_path

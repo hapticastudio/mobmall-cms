@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "user" do
   context "admin rights" do
     it "allows promoting to admin" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       another_user = FactoryGirl.create(:user)
       visit users_path
       click_button "Promote"
@@ -12,8 +11,7 @@ describe "user" do
     end
 
     it "allows degrading to moderator" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       another_user = FactoryGirl.create(:admin)
       visit users_path
       click_button "Degrade"
@@ -35,8 +33,7 @@ describe "user" do
     end
 
     it "should allow admins" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit users_path
       current_path.should == users_path
     end
@@ -111,8 +108,7 @@ describe "user" do
     end
 
     it "allows admin to enter the page" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit new_user_path
       current_path.should == new_user_path
     end
@@ -120,8 +116,7 @@ describe "user" do
 
   context "create" do
     it "sends an email to the user" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit new_user_path
       fill_in "Email", with: "some@mail.com"
       click_button "Create User"
@@ -130,8 +125,7 @@ describe "user" do
     end
 
     it "renders :new in case of problems" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit new_user_path
       User.any_instance.stub(save: false)
       fill_in "Email", with: "some@mail.com"
@@ -140,8 +134,7 @@ describe "user" do
     end
 
     it "redirects to panel on success" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit new_user_path
       fill_in "Email", with: "some@mail.com"
       click_button "Create User"
@@ -149,8 +142,7 @@ describe "user" do
     end
 
     it "creates user without password on success" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       visit new_user_path
       fill_in "Email", with: "some@mail.com"
       expect{click_button "Create User"}.to change{User.count}.from(1).to(2)
@@ -160,8 +152,7 @@ describe "user" do
 
   context "destroy", js: true do
     it "admin should be able to remove user" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       user_to_delete = FactoryGirl.create(:user)
       visit users_path
       popup.confirm {
@@ -172,8 +163,7 @@ describe "user" do
     end
 
     it "does not remove user if confirmation is dismissed" do
-      user = FactoryGirl.create(:admin)
-      login(user)
+      login_as_admin
       user_to_delete = FactoryGirl.create(:user)
       visit users_path
       popup.dismiss {
