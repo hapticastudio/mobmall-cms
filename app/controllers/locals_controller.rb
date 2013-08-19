@@ -16,12 +16,12 @@ class LocalsController < ApplicationController
   end
 
   def edit
-    @local = Local.find(id_params[:id])
+    @local = resource
     @possible_moderators = User.moderators
   end
 
   def update
-    @local = Local.find(id_params[:id])
+    @local = resource
     if @local.update_attributes(edit_params)
       redirect_to panel_index_path
     else
@@ -31,6 +31,10 @@ class LocalsController < ApplicationController
   end
 
   private
+
+  def resource
+    Local.where(id_params).first
+  end
 
   def edit_params
     params.require(:local).permit(:user_id)

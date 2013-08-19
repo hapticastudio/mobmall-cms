@@ -22,24 +22,24 @@ class UsersController < ApplicationController
   end
 
   def promote
-    @user = User.find(id_params[:id])
+    @user = resource
     @user.promote! 
     redirect_to users_path
   end
 
   def degrade
-    @user = User.find(id_params[:id])
+    @user = resource
     @user.degrade! 
     redirect_to users_path
   end
 
   def edit
-    @user = User.find(id_params[:id])
+    @user = resource
     not_authorised unless @user == current_user
   end
 
   def update
-    @user = User.find(id_params[:id])
+    @user = resource
     not_authorised unless @user == current_user
     if @user.update_attributes(password_params)
       redirect_to panel_index_path, notice: "Account updated successfully"
@@ -49,12 +49,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(id_params[:id])
+    @user = resource
     @user.destroy if @user
     redirect_to users_path, notice: "User #{@user.email} successfully removed"
   end
 
   private
+
+  def resource
+    User.where(id_params).first
+  end
 
   def user_params
     params.require(:user).permit(:email)
