@@ -62,5 +62,49 @@ describe "local" do
         local.reload.moderator.should == user
       end
     end
+
+    context "mod" do
+      it "should be accessible from panel" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        click_link "Edit local"
+        current_path.should == edit_local_path(local)
+      end
+
+      it "should allow me to page of my local" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        visit edit_local_path(local)
+        current_path.should == edit_local_path(local)
+      end
+
+      it "should not allow strangers to edit local" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local)
+        login(user)
+        visit edit_local_path(local)
+        current_path.should == panel_index_path
+      end
+
+      it "should not have moderator select box" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        visit edit_local_path(local)
+        page.should_not have_selector('select') #expect not to find moderators select field
+      end
+
+      it "should be able to update name" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        visit edit_local_path(local)
+        fill_in "Name", with: "Zara"
+        click_button "Update Local"
+        Local.all.map(&:name).should == ["Zara"]
+      end
+    end
   end
 end

@@ -14,9 +14,14 @@ class Local < ActiveRecord::Base
     content.name = name
   end
 
+  def save
+    content.save
+    super
+  end
+
   private
 
   def content
-    contents.last || contents.new
+    @content ||= contents.last || contents.new
   end
 end

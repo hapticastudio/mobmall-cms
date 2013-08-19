@@ -1,0 +1,3 @@
+<% if current_user.local %>
+  <%= link_to "Edit local", edit_local_path(current_user.local), class: "button expand" %>
+<% end %>
