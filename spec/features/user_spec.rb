@@ -38,7 +38,7 @@ describe "user" do
       current_path.should == users_path
     end
 
-    it "should follow to locals edit page via moderator name", focus: true do
+    it "should follow to locals edit page via moderator name" do
       user  = FactoryGirl.create(:user)
       local = FactoryGirl.create(:local, moderator: user)
       login_as_admin

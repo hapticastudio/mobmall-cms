@@ -2,7 +2,7 @@ class Local < ActiveRecord::Base
   has_many   :contents
   belongs_to :moderator, class_name: "User", foreign_key: :user_id
 
-  validates_length_of :name, maximum: 50
+  validates :name, presence: true, length: {maximum: 50}
 
   delegate :email, to: :moderator, prefix: true, allow_nil: true
 
