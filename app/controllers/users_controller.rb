@@ -63,8 +63,4 @@ class UsersController < ApplicationController
   def password_params
     params.require(:user).permit(:password, :password_confirmation)
   end
-
-  def id_params
-    params.permit(:id)
-  end
 end

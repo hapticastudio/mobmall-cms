@@ -1,0 +1,14 @@
+<div class="row small-3">
+  <h1 class="text-center">Edit local</h1>
+  <%= form_for @local do |f| %>
+    <p>
+      <%= f.label :name %>
+      <%= @local.name %>
+    </p>
+    <p>
+      <%= f.label :moderator %>
+      <%= f.collection_select :user_id, @possible_moderators, :id, :email, include_blank: "none" %>
+    </p>
+    <%= f.submit nil, class: "button expand" %>
+  <% end %>
+</div>

@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def id_params
+    params.permit(:id)
+  end
+
   def require_admin
     not_authorised unless current_user.admin?
   end

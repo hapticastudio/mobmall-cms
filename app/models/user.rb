@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  scope :ordered, -> { order(:id) }
+  scope :ordered,    -> { order(:id)       }
+  scope :moderators, -> { where(role: nil) }
 
   def admin?
     role == "admin"

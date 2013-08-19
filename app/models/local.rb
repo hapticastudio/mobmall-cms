@@ -1,5 +1,6 @@
 class Local < ActiveRecord::Base
-  has_many :contents
+  has_many   :contents
+  belongs_to :user
 
   validates_length_of :name, maximum: 50
 
