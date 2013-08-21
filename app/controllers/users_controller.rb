@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    resource.destroy
+    resource.destroy if resource
     redirect_to users_path, notice: "User #{resource.email} successfully removed"
   end
 

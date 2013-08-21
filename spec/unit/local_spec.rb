@@ -12,7 +12,7 @@ describe Local do
 
     it "is moderators email if mod is present" do
       local = Local.new
-      mod = FactoryGirl.create(:user)
+      mod = FactoryGirl.build(:user)
       local.moderator = mod
       local.moderator_email.should == mod.email
     end
