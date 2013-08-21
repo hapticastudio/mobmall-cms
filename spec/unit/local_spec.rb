@@ -22,8 +22,18 @@ describe Local do
     it "should allow partial updates" do
       local = FactoryGirl.create(:local)
       local.update_attributes(description: "Tasty om nom noms")
+      local.contents.last.confirm!
+
+      local = Local.where(id: local.id).last
+
       local.description.should == "Tasty om nom noms"
       local.name.should == "MacDonalds"
+    end
+
+    it "changes are not used without confirmation" do
+      local = FactoryGirl.create(:local)
+      local.update_attributes(name: "KFC")
+      Local.where(id: local.id).first.name.should == "MacDonalds"
     end
 
     it "should create new content object if changes present" do

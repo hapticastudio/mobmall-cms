@@ -15,6 +15,6 @@ class Local < ActiveRecord::Base
   private
 
   def content
-    @content ||= contents.last || contents.new
+    @content ||= contents.confirmed.last || contents.new(confirmed: true)
   end
 end

@@ -10,4 +10,12 @@ describe Local::Content do
       }
     end
   end
+
+  context "confirm!" do
+    it "sets confirmed to true" do
+      content = Local::Content.new
+      content.confirm!
+      content.confirmed.should be_true
+    end
+  end
 end
