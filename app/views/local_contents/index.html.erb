@@ -20,10 +20,8 @@
         </tr>
         <tr>
           <td/>
-          <td>
-            <%= button_to "Confirm", confirm_local_content_path(content), method: :patch %>
-          </td>
-          <td/>
+          <td><%= button_to "Confirm", confirm_local_content_path(content), method: :patch %></td>
+          <td><%= button_to "Reject", reject_local_content_path(content), method: :patch %></td>
         </tr>
       <% end %>
     </tbody>

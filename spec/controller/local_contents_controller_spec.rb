@@ -39,4 +39,24 @@ describe LocalContentsController, type: :controller do
       assert_redirected_to local_contents_path
     end
   end
+
+  context "reject" do
+    it "should block unauthenticated" do
+      patch :reject, id: "fake_id"
+      assert_redirected_to root_url
+    end
+
+    it "should block non-admins" do
+      login_as_user
+      patch :reject, id: "fake_id"
+      assert_redirected_to root_url
+    end
+
+    it "should redirect to index" do
+      login_as_admin
+      content = Local::Content.create
+      patch :reject, id: content.id
+      assert_redirected_to local_contents_path
+    end
+  end
 end

@@ -10,4 +10,9 @@ class LocalContentsController < ApplicationController
     Local::Content.where(id_params).first.confirm!
     redirect_to local_contents_path
   end
+
+  def reject
+    Local::Content.where(id_params).first.reject!
+    redirect_to local_contents_path
+  end
 end

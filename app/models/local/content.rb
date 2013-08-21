@@ -15,5 +15,9 @@ class Local
     def confirm!
       update_attribute(:confirmed, true)
     end
+
+    def reject!
+      update_attribute(:confirmed, false)
+    end
   end
 end

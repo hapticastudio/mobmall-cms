@@ -13,6 +13,7 @@ MobMall::Application.routes.draw do
   resources :local_contents, only: :index do
     member do
       patch :confirm
+      patch :reject
     end
   end
   
