@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'sorcery'
 gem 'zurb-foundation'
+gem 'tinymce-rails'
 
 group :production do
   gem 'rails_12factor'
