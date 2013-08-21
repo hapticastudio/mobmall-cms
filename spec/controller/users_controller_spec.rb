@@ -59,7 +59,7 @@ describe UsersController, type: :controller do
 
     it "should render :new on failes creation" do
       login_as_admin
-      post :create, user: {email: "is not enough"}
+      post :create, user: {email: ""}
       assert_template :new
     end
   end
