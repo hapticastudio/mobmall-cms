@@ -5,22 +5,7 @@ class Local < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 50}
 
   delegate :email, to: :moderator, prefix: true, allow_nil: true
-
-  def name
-    content.name
-  end
-
-  def name=(name)
-    content.name = name
-  end
-
-  def description
-    content.description
-  end
-
-  def description=(description)
-    content.description = description
-  end
+  delegate :name, :name=, :description, :description=, to: :content
 
   def save
     contents.create(content.to_hash) if content.changed? and self.persisted?
