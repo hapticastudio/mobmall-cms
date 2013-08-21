@@ -1,6 +1,7 @@
 class LocalsController < ApplicationController
   before_filter :require_login
   before_filter :require_admin, except: [:edit, :update]
+  before_filter :require_moderator_or_admin, only: [:edit, :update]
   
   def index
     @locals = Local.all
@@ -20,27 +21,26 @@ class LocalsController < ApplicationController
   end
 
   def edit
-    @local = resource
-    not_authorised unless @local.moderator == current_user or current_user.admin?
-    @possible_moderators = User.moderators
+    @possible_moderators = User.moderators if current_user.admin?
   end
 
   def update
-    @local = resource
-    not_authorised unless @local.moderator == current_user or current_user.admin?
-
-    if @local.update_attributes(edit_params)
+    if resource.update_attributes(edit_params)
       redirect_to panel_index_path
     else
-      @possible_moderators = User.moderators
+      @possible_moderators = User.moderators if current_user.admin?
       render :edit
     end
   end
 
   private
 
+  def require_moderator_or_admin
+    not_authorised unless resource.moderator == current_user or current_user.admin?
+  end
+
   def resource
-    Local.where(id_params).first
+    @local ||= Local.where(id_params).first
   end
 
   def edit_params

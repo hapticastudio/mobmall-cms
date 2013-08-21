@@ -31,6 +31,12 @@ describe UsersController, type: :controller do
       get :new
       assert_redirected_to root_url
     end
+
+    it "should render :new" do
+      login_as_admin
+      get :new
+      assert_template :new
+    end
   end
 
   context "create" do
@@ -53,7 +59,7 @@ describe UsersController, type: :controller do
 
     it "should render :new on failes creation" do
       login_as_admin
-      post :create, user: {name: "is not enough"}
+      post :create, user: {email: "is not enough"}
       assert_template :new
     end
   end
