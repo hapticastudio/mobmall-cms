@@ -8,3 +8,13 @@ end
 def login_as_admin
   login(FactoryGirl.create(:admin))
 end
+
+def login_as_user
+  if @controller.present? #controller tests
+    user = FactoryGirl.build_stubbed(:user)
+    login_user(user)
+  else
+    user = FactoryGirl.create(:user)
+    login(user)
+  end
+end

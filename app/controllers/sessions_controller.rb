@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = login(params[:email], params[:password], params[:remember_me])
+    user = login(params[:email], params[:password])
     if user
       redirect_to panel_index_path, :notice => "Logged in!"
     else
