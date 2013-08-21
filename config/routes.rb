@@ -10,6 +10,11 @@ MobMall::Application.routes.draw do
   end
 
   resources :locals, only: [:index, :new, :create, :edit, :update]
+  resources :local_contents, only: :index do
+    member do
+      patch :confirm
+    end
+  end
   
   get "logout" => "sessions#destroy", :as => "logout"
 

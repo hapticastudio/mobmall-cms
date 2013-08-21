@@ -1,0 +1,31 @@
+<div class="row small-3">  
+  <h1 class="text-center">Unconfirmed contents</h1>
+  <table>
+    <thead>
+      <td>Status</td>
+      <td>Name</td>
+      <td>Description</td>
+    </thead>
+    <tbody>
+      <% @unconfirmed_contents.each do |content| %>
+        <tr>
+          <td>From:</td>
+          <td><%= content.local.name %></td>
+          <td><%= content.local.description %></td>
+        </tr>
+        <tr>
+          <td>To:</td>
+          <td><%= content.name %></td>
+          <td><%= content.description %></td>
+        </tr>
+        <tr>
+          <td/>
+          <td>
+            <%= button_to "Confirm", confirm_local_content_path(content), method: :patch %>
+          </td>
+          <td/>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
