@@ -61,4 +61,8 @@ class UsersController < ApplicationController
   def password_params
     params.require(:user).permit(:password, :password_confirmation)
   end
+
+  def require_matching_users
+    not_authorised unless resource == current_user
+  end
 end

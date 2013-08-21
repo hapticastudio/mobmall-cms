@@ -13,10 +13,6 @@ class ApplicationController < ActionController::Base
     not_authorised unless current_user.admin?
   end
 
-  def require_matching_users
-    not_authorised unless resource == current_user
-  end
-
   def not_authorised
     redirect_to root_url, :alert => "You don't have permission to visit this page" and return
   end
