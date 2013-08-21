@@ -107,36 +107,6 @@ describe "local" do
         Local.all.map(&:name).should == ["Zara"]
         Local.all.map(&:description).should == ["This is a cloth's shop"]
       end
-
-      it "should be able to update content partially" do
-        user = FactoryGirl.create(:user)
-        local = FactoryGirl.create(:local, moderator: user)
-        login(user)
-        visit edit_local_path(local)
-        fill_in "Description", with: "Tasty om nom noms"
-        click_button "Update Local"
-        Local.all.map(&:name).should == ["MacDonalds"]
-        Local.all.map(&:description).should == ["Tasty om nom noms"]
-      end
-
-      it "should store history of contents" do
-        user = FactoryGirl.create(:user)
-        local = FactoryGirl.create(:local, moderator: user)
-        login(user)
-        visit edit_local_path(local)
-        fill_in "Description", with: "Tasty om nom noms"
-        click_button "Update Local"
-        local.contents.count.should == 2
-      end
-
-      it "should not create new content object if no changes presented" do
-        user = FactoryGirl.create(:user)
-        local = FactoryGirl.create(:local, moderator: user)
-        login(user)
-        visit edit_local_path(local)
-        click_button "Update Local"
-        local.contents.count.should == 1
-      end
     end
   end
 end

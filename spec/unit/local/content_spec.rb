@@ -10,12 +10,4 @@ describe Local::Content do
       }
     end
   end
-
-  context "description=" do
-    it "does not set blank string" do
-      content = Local::Content.new
-      content.description = ""
-      content.description.should == nil
-    end
-  end
 end

@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20130821000425) do
     t.integer  "local_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "description"
+    t.text     "description", default: ""
   end
 
   create_table "locals", force: true do |t|

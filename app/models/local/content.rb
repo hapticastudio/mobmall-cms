@@ -6,9 +6,5 @@ class Local
         description: description
       }
     end
-
-    def description=(description)
-      super unless description.blank?
-    end
   end
 end

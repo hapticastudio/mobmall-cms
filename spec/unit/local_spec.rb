@@ -17,4 +17,27 @@ describe Local do
       local.moderator_email.should == mod.email
     end
   end
+
+  context "content versioning" do
+    it "should allow partial updates" do
+      local = FactoryGirl.create(:local)
+      local.update_attributes(description: "Tasty om nom noms")
+      local.description.should == "Tasty om nom noms"
+      local.name.should == "MacDonalds"
+    end
+
+    it "should create new content object if changes present" do
+      local = FactoryGirl.create(:local)
+      expect do 
+        local.update_attributes(description: "Tasty om nom noms")
+      end.to change{local.contents.count}.from(1).to(2)
+    end
+
+    it "should not create new content if no changes" do
+      local = FactoryGirl.create(:local)
+      expect do 
+        local.update_attributes(description: "")
+      end.not_to change{local.contents.count}
+    end
+  end
 end
