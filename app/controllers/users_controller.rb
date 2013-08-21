@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_login
   before_filter :require_admin, except: [:edit, :update]
+  before_filter :require_matching_users, only: [:edit, :update]
 
   def index
     @users = User.ordered
@@ -22,26 +23,20 @@ class UsersController < ApplicationController
   end
 
   def promote
-    @user = resource
-    @user.promote! 
+    resource.promote! 
     redirect_to users_path
   end
 
   def degrade
-    @user = resource
-    @user.degrade! 
+    resource.degrade! 
     redirect_to users_path
   end
 
   def edit
-    @user = resource
-    not_authorised unless @user == current_user
   end
 
   def update
-    @user = resource
-    not_authorised unless @user == current_user
-    if @user.update_attributes(password_params)
+    if resource.update_attributes(password_params)
       redirect_to panel_index_path, notice: "Account updated successfully"
     else
       render :edit
@@ -49,15 +44,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = resource
-    @user.destroy if @user
-    redirect_to users_path, notice: "User #{@user.email} successfully removed"
+    resource.destroy
+    redirect_to users_path, notice: "User #{resource.email} successfully removed"
   end
 
   private
 
   def resource
-    User.where(id_params).first
+    @user ||= User.where(id_params).first
   end
 
   def user_params

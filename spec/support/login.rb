@@ -6,11 +6,17 @@ def login(user = InvalidUser.new)
 end
 
 def login_as_admin
-  login(FactoryGirl.create(:admin))
+  if @controller.present? #functional tests
+    admin = FactoryGirl.build_stubbed(:admin)
+    login_user(admin)
+  else
+    user = FactoryGirl.create(:admin)
+    login(user)
+  end
 end
 
 def login_as_user
-  if @controller.present? #controller tests
+  if @controller.present? #functional tests
     user = FactoryGirl.build_stubbed(:user)
     login_user(user)
   else
