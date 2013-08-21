@@ -23,6 +23,7 @@ group :test do
   gem "shoulda"
   gem "database_cleaner", '1.0.1'
   gem "prickle"
+  gem "pry"
 end
 
 group :development do

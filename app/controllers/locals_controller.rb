@@ -47,7 +47,7 @@ class LocalsController < ApplicationController
     if current_user.admin?
       params.require(:local).permit(:user_id)
     else
-      params.require(:local).permit(:name)
+      params.require(:local).permit(:name, :description)
     end
   end
 

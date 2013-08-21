@@ -96,14 +96,46 @@ describe "local" do
         page.should_not have_selector('select') #expect not to find moderators select field
       end
 
-      it "should be able to update name" do
+      it "should be able to update content" do
         user = FactoryGirl.create(:user)
         local = FactoryGirl.create(:local, moderator: user)
         login(user)
         visit edit_local_path(local)
         fill_in "Name", with: "Zara"
+        fill_in "Description", with: "This is a cloth's shop"
         click_button "Update Local"
         Local.all.map(&:name).should == ["Zara"]
+        Local.all.map(&:description).should == ["This is a cloth's shop"]
+      end
+
+      it "should be able to update content partially" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        visit edit_local_path(local)
+        fill_in "Description", with: "Tasty om nom noms"
+        click_button "Update Local"
+        Local.all.map(&:name).should == ["MacDonalds"]
+        Local.all.map(&:description).should == ["Tasty om nom noms"]
+      end
+
+      it "should store history of contents" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        visit edit_local_path(local)
+        fill_in "Description", with: "Tasty om nom noms"
+        click_button "Update Local"
+        local.contents.count.should == 2
+      end
+
+      it "should not create new content object if no changes presented" do
+        user = FactoryGirl.create(:user)
+        local = FactoryGirl.create(:local, moderator: user)
+        login(user)
+        visit edit_local_path(local)
+        click_button "Update Local"
+        local.contents.count.should == 1
       end
     end
   end

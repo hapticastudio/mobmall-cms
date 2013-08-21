@@ -14,8 +14,16 @@ class Local < ActiveRecord::Base
     content.name = name
   end
 
+  def description
+    content.description
+  end
+
+  def description=(description)
+    content.description = description
+  end
+
   def save
-    content.save
+    contents.create(content.to_hash) if content.changed? and self.persisted?
     super
   end
 
