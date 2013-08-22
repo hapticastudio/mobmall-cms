@@ -23,7 +23,6 @@ group :test do
   gem "factory_girl_rails"
   gem "shoulda"
   gem "database_cleaner", '1.0.1'
-  gem "prickle"
   gem "pry"
 end
 

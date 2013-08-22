@@ -5,9 +5,7 @@ require 'capybara/rails'
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
-require 'prickle/capybara'
 
-include Prickle::Capybara
 include Sorcery::TestHelpers::Rails
 
 # Requires supporting ruby files with custom matchers and macros, etc,

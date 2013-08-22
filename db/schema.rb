@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821124225) do
+ActiveRecord::Schema.define(version: 20130821181718) do
+
+  create_table "devices", force: true do |t|
+    t.string   "token"
+    t.string   "push_token"
+    t.string   "operating_system"
+    t.string   "app_version"
+    t.datetime "last_request_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "local_contents", force: true do |t|
     t.string   "name"

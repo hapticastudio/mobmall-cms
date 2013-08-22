@@ -16,6 +16,12 @@ MobMall::Application.routes.draw do
       patch :reject
     end
   end
+
+  namespace :api, defaults: { format: "json" } do
+    namespace :v1, defaults: { format: "json" } do
+      resources :devices, only: [:create, :update]
+    end
+  end
   
   get "logout" => "sessions#destroy", :as => "logout"
 
