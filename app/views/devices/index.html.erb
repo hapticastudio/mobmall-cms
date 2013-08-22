@@ -1,0 +1,19 @@
+<div class="row small-3">  
+  <h1 class="text-center">Registered devices</h1>
+  <table>
+    <thead>
+      <td>Operating system</td>
+      <td>Application version</td>
+      <td>Last seen</td>
+    </thead>
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr>
+          <td><%= device.operating_system %></td>
+          <td><%= device.app_version %></td>
+          <td><%= device.last_seen %><td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
