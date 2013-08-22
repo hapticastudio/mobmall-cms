@@ -9,7 +9,7 @@ MobMall::Application.routes.draw do
     end
   end
 
-  resources :locals, only: [:index, :new, :create, :edit, :update] do
+  resources :locals, only: [:index, :show, :new, :create, :edit, :update] do
     resources :events, only: [:new, :create, :edit, :update]
   end
 

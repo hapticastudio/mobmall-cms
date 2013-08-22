@@ -1,10 +1,13 @@
 class LocalsController < ApplicationController
   before_filter :require_login
-  before_filter :require_admin, except: [:edit, :update]
-  before_filter :require_moderator_or_admin, only: [:edit, :update]
+  before_filter :require_admin, only: [:index, :new, :create]
+  before_filter :require_moderator_or_admin, only: [:show, :edit, :update]
   
   def index
     @locals = Local.all
+  end
+
+  def show
   end
 
   def new
@@ -26,7 +29,7 @@ class LocalsController < ApplicationController
 
   def update
     if resource.update_attributes(edit_params)
-      redirect_to panel_index_path
+      redirect_to local_path(resource)
     else
       @possible_moderators = User.moderators if current_user.admin?
       render :edit

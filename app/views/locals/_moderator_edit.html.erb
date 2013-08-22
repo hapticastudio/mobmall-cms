@@ -1,7 +1,4 @@
 <p>
-  <%= link_to "New event", new_local_event_path(local), class: "button expand" %>
-</p>
-<p>
   <%= form_for local do |f| %>
     <%= f.text_field :name, placeholder: "Name" %>
     <%= f.text_area  :description, placeholder: "Description", class: "tinymce" %>

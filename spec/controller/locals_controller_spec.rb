@@ -20,6 +20,33 @@ describe LocalsController, type: :controller do
     end
   end
 
+  context "show" do
+    it "should block unauthenticated" do
+      get :show, id: 1
+      assert_redirected_to root_url
+    end
+
+    it "should allow admins" do
+      login_as_admin
+      get :show, id: FactoryGirl.create(:local).id
+      assert_template :show
+    end
+
+    it "should allow moderator" do
+      user = FactoryGirl.create(:user)
+      local = FactoryGirl.create(:local, moderator: user)
+      login_user(user)
+      get :show, id: local.id
+      assert_template :show
+    end
+
+    it "should not allow stranger" do
+      login_as_user
+      get :show, id: FactoryGirl.create(:local).id
+      assert_redirected_to root_url
+    end
+  end
+
   context "new" do
     it "should block unauthenticated" do
       get :new
@@ -108,7 +135,7 @@ describe LocalsController, type: :controller do
       login_as_admin
       local = FactoryGirl.create(:local)
       patch :update, id: local.id, local: {user_id: 2}
-      assert_redirected_to panel_index_path
+      assert_redirected_to local_path(local)
     end
 
     it "should allow moderator to update name and description" do
@@ -116,7 +143,7 @@ describe LocalsController, type: :controller do
       local = FactoryGirl.create(:local, moderator: user)
       login_user(user)
       patch :update, id: local.id, local: {name: "New name", description: "New description"}
-      assert_redirected_to panel_index_path
+      assert_redirected_to local_path(local)
     end
 
     it "should render :edit on failed update" do
