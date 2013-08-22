@@ -18,11 +18,8 @@ end
 group :test do
   gem 'sqlite3'
   gem "rspec-rails"
-  gem "capybara"
-  gem "capybara-webkit"
   gem "factory_girl_rails"
   gem "shoulda"
-  gem "database_cleaner", '1.0.1'
   gem "pry"
 end
 
