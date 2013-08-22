@@ -16,6 +16,20 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = local.events.where(id_params).first
+  end
+
+  def update
+    @event = local.events.where(id_params).first
+
+    if @event.update_attributes(event_params)
+      redirect_to local_path(local)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def event_params

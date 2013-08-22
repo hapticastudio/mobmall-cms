@@ -35,6 +35,7 @@ describe LocalsController, type: :controller do
     it "should allow moderator" do
       user = FactoryGirl.create(:user)
       local = FactoryGirl.create(:local, moderator: user)
+      FactoryGirl.create(:event, local: local)
       login_user(user)
       get :show, id: local.id
       assert_template :show

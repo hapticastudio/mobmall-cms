@@ -15,6 +15,7 @@
         <td>Description</td>
         <td>From</td>
         <td>to</td>
+        <td/>
       </thead>
       <tbody>
         <% @events.each do |event| %>
@@ -22,6 +23,7 @@
             <td><%= event.description.html_safe %></td>
             <td><%= event.begin_time.to_s(:short) %></td>
             <td><%= event.end_time.to_s(:short) %></td>
+            <td><%= link_to "Edit",  edit_local_event_path(@local, event) %>
           </tr>
         <% end %>
       </tbody>

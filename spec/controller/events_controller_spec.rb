@@ -46,11 +46,70 @@ describe EventsController, type: :controller do
       assert_template :new
     end
 
-    it "should redirect to local edit on success" do
+    it "should redirect to local show on success" do
       user = FactoryGirl.create(:user)
       local = FactoryGirl.create(:local, moderator: user)
       login_user(user)
       post :create, local_id: local.id, event: { description: "something", begin_time: Time.now, end_time: 2.day.from_now }
+      assert_redirected_to local_path(local)
+    end
+  end
+
+  context "edit" do
+    it "should block unauthenticated" do
+      local = FactoryGirl.create(:local)
+      get :edit, local_id: local.id, id: "fake_id"
+      assert_redirected_to root_url
+    end
+
+    it "should block non-moderators" do
+      local = FactoryGirl.create(:local)
+      event = FactoryGirl.create(:event, local: local)
+      login_as_user
+      get :edit, local_id: local.id, id: event.id
+      assert_redirected_to root_url
+    end
+
+    it "should render :edit for moderator" do
+      user = FactoryGirl.create(:user)
+      local = FactoryGirl.create(:local, moderator: user)
+      event = FactoryGirl.create(:event, local: local)
+      login_user(user)
+      get :edit, local_id: local.id, id: event.id
+      assert_template :edit
+    end
+  end
+
+  context "update" do
+    it "should block unauthenticated" do
+      local = FactoryGirl.create(:local)
+      post :update, local_id: local.id, id: "fake_id", event: { description: "something" }
+      assert_redirected_to root_url
+    end
+
+    it "should block non-moderators" do
+      local = FactoryGirl.create(:local)
+      event = FactoryGirl.create(:event, local: local)
+      login_as_user
+      post :update, local_id: local.id, id: event.id, event: { description: "something" }
+      assert_redirected_to root_url
+    end
+
+    it "should render :new on errors" do
+      user = FactoryGirl.create(:user)
+      local = FactoryGirl.create(:local, moderator: user)
+      event = FactoryGirl.create(:event, local: local)
+      login_user(user)
+      post :update, local_id: local.id, id: event.id, event: { description: "" }
+      assert_template :edit
+    end
+
+    it "should redirect to local show on success" do
+      user = FactoryGirl.create(:user)
+      local = FactoryGirl.create(:local, moderator: user)
+      event = FactoryGirl.create(:event, local: local)
+      login_user(user)
+      post :update, local_id: local.id, id: event.id, event: { description: "something", begin_time: Time.now, end_time: 2.day.from_now }
       assert_redirected_to local_path(local)
     end
   end
