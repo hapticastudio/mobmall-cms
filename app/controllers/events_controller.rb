@@ -7,10 +7,10 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = local.events.new(event_params)
 
     if @event.save
-      redirect_to edit_local_path(local)
+      redirect_to local_path(local)
     else
       render :new
     end

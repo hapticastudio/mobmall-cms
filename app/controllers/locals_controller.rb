@@ -8,6 +8,7 @@ class LocalsController < ApplicationController
   end
 
   def show
+    @events = @local.events
   end
 
   def new
