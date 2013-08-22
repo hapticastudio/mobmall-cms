@@ -7,7 +7,10 @@ module Api
         places = Local.all
         places = places.updated_since(updated_since) if updated_since
 
-        render json: {content: {places: places}}
+        events = Event.all
+        events = events.updated_since(updated_since) if updated_since
+
+        render json: {content: {places: places, events: events}}
       end
 
       private

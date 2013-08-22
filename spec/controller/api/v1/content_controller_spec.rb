@@ -9,16 +9,26 @@ describe Api::V1::ContentController, type: :controller do
 
     it "responds with content if token passed" do
       device = FactoryGirl.create(:device)
-      FactoryGirl.create(:local)
+      local = FactoryGirl.create(:local)
+      event = FactoryGirl.create(:event, local: local)
       get :index, id: device.token
 
       expected_json = {
         'content' => {
           'places' => [
             {
-              'id' => 1,
-              'name' => "MacDonalds",
-              'description' => ""
+              'id' => local.id,
+              'name' => local.name,
+              'description' => local.description
+            }
+          ],
+          'events' => [
+            {
+              "id" => event.id, 
+              "description" => event.description, 
+              "local_id" => event.local_id, 
+              "begin_time" => event.begin_time, 
+              "end_time" => event.end_time
             }
           ]
         }
@@ -31,16 +41,30 @@ describe Api::V1::ContentController, type: :controller do
       device = FactoryGirl.create(:device)
       FactoryGirl.create(:local, updated_at: 2.days.ago)
       FactoryGirl.create(:local, updated_at: 2.days.ago)
-      FactoryGirl.create(:local)
+      local = FactoryGirl.create(:local)
+
+      FactoryGirl.create(:event, updated_at: 2.days.ago)
+      FactoryGirl.create(:event, updated_at: 2.days.ago)
+      event = FactoryGirl.create(:event, local: local)
+
       get :index, id: device.token, updated_since: 1.day.ago
 
       expected_json = {
         'content' => {
           'places' => [
             {
-              'id' => 3,
-              'name' => "MacDonalds",
-              'description' => ""
+              'id' => local.id,
+              'name' => local.name,
+              'description' => local.description
+            }
+          ],
+          'events' => [
+            {
+              "id" => event.id, 
+              "description" => event.description, 
+              "local_id" => event.local_id, 
+              "begin_time" => event.begin_time, 
+              "end_time" => event.end_time
             }
           ]
         }

@@ -7,6 +7,20 @@ class Event < ActiveRecord::Base
 
   validate :end_time_is_after_begin_time
 
+  scope :updated_since, ->(updated_since){ where('updated_at > ?', updated_since) }
+
+  def as_json(*)
+    super(only: [:id, :local_id, :description, :begin_time, :end_time])
+  end
+
+  def begin_time
+    super.to_s
+  end
+
+  def end_time
+    super.to_s
+  end
+
   private
 
   def end_time_is_after_begin_time

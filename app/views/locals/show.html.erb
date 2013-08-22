@@ -21,8 +21,8 @@
         <% @events.each do |event| %>
           <tr>
             <td><%= event.description.html_safe %></td>
-            <td><%= event.begin_time.to_s(:short) %></td>
-            <td><%= event.end_time.to_s(:short) %></td>
+            <td><%= event.begin_time %></td>
+            <td><%= event.end_time %></td>
             <td><%= link_to "Edit",  edit_local_event_path(@local, event) %>
           </tr>
         <% end %>
