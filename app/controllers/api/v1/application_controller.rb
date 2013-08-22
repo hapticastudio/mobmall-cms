@@ -9,7 +9,11 @@ module Api
 
       def authorize
         @device = Device.where(token: token).first
-        head :forbidden unless @device
+        if @device
+          @device.update_last_request_at!
+        else
+          head :forbidden
+        end
       end
     end
   end
