@@ -1,5 +1,6 @@
 class Local < ActiveRecord::Base
-  has_many   :contents
+  has_many :contents
+  has_many :events
   belongs_to :moderator, class_name: "User", foreign_key: :user_id
 
   scope :updated_since, ->(updated_since){ where('updated_at > ?', updated_since) }

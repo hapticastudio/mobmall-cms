@@ -1,7 +1,4 @@
 <div class="row small-3">
   <h1 class="text-center">Edit local</h1>
-  <%= form_for @local do |f| %>
-    <%= render partial: "#{current_user.title}_edit_fields", locals: {f: f} %>
-    <%= f.submit nil, class: "button expand" %>
-  <% end %>
+  <%= render partial: "#{current_user.title}_edit", locals: {local: @local} %>
 </div>

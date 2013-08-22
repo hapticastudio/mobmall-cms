@@ -1,0 +1,29 @@
+<div class="row small-3">
+  <h1 class="text-center">Create new event</h1>
+  <%= form_for [:local, @event] do |f| %>
+    <% if @event.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @event.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <p>
+      <%= f.text_area :description, placeholder: "Description", class: "tinymce" %>
+      <%= tinymce %>
+    </p>
+    <p>
+      <%= f.label :begin_time %>
+      <%= f.text_field :begin_time, class: "datepicker" %>
+    </p>
+    <p>
+      <%= f.label :end_time %>
+      <%= f.text_field :end_time, class: "datepicker" %>
+    </p>
+    <%= f.submit nil, class: "button expand" %>
+  <% end %>
+</div>
