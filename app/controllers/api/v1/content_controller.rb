@@ -1,27 +1,11 @@
 module Api
   module V1
-    class ContentController < ActionController::Base
+    class ContentController < ApplicationController
+      before_filter :authorize
+
       def index
-        device = Device.where(token: token).first
-        unless device
-          head :forbidden
-        else
-          places = Local.all
-
-          json = {
-            content: {
-              places: places
-            }
-          }
-
-          render json: json
-        end
-      end
-
-      private
-
-      def token
-        params.permit(:id)[:id]
+        places = Local.all
+        render json: {content: {places: places}}
       end
     end
   end
