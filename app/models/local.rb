@@ -12,6 +12,10 @@ class Local < ActiveRecord::Base
     super
   end
 
+  def as_json(*)
+    super(only: [:id], methods: [:name, :description])
+  end
+
   private
 
   def content
