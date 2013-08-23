@@ -4,7 +4,7 @@ describe Api::V1::DevicesController, type: :controller do
   context "create" do
     it "responds with :ok and token if successfull" do
       post :create, device: {app_version: "1.0.0"}
-      json["device"]["token"].should be
+      assert json
       assert_response :ok
     end
 
