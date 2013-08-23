@@ -12,6 +12,7 @@ gem 'jquery-turbolinks'
 gem 'sorcery'
 gem 'zurb-foundation'
 gem 'tinymce-rails'
+gem 'active_model_serializers'
 
 group :production do
   gem 'rails_12factor'

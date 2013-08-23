@@ -1,4 +1,5 @@
 class Local < ActiveRecord::Base
+  include ActiveRecord::SerializerOverride
   include UpdatedSinceScope
 
   has_many :contents
@@ -13,10 +14,6 @@ class Local < ActiveRecord::Base
   def save
     contents.create(content.to_hash) if content.changed? and self.persisted?
     super
-  end
-
-  def as_json(*)
-    super(only: [:id], methods: [:name, :description])
   end
 
   private

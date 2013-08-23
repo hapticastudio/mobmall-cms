@@ -8,15 +8,6 @@ describe Device do
     device.token.blank?.should == false
   end
 
-  it "should return token as json" do
-    device = FactoryGirl.create(:device)
-    device.as_json.should == {
-      'device' => {
-        'token' => device.token
-      }
-    }
-  end
-
   it "should save current date to last_seen at creation" do
     device = FactoryGirl.create(:device)
     device.reload.last_request_at.should be
