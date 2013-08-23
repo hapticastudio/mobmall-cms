@@ -26,7 +26,7 @@ describe User do
     it "sets role to nil" do
       user = FactoryGirl.build(:admin)
       user.degrade!
-      user.role.should == nil
+      user.role.should == 'moderator'
     end
   end
 
@@ -47,16 +47,6 @@ describe User do
 
     it "returns true if crypted_password is saved" do
       FactoryGirl.create(:user).password_present?.should be_true
-    end
-  end
-
-  context "title" do
-    it "returns 'admin' if the role is admin" do
-      FactoryGirl.build(:admin).title.should == "admin"
-    end
-
-    it "returns 'moderator' if there is no role" do
-      FactoryGirl.build(:user).title.should == 'moderator'
     end
   end
 end

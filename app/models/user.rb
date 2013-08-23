@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   has_one :local
 
-  scope :ordered,    -> { order(:id)       }
-  scope :moderators, -> { where(role: nil) }
+  scope :ordered,    -> { order(:id)               }
+  scope :moderators, -> { where(role: 'moderator') }
 
   def admin?
     role == "admin"
@@ -18,19 +18,11 @@ class User < ActiveRecord::Base
     crypted_password.present?
   end
 
-  def title
-    if admin?
-      "admin"
-    else
-      "moderator"
-    end
-  end
-
   def promote!
     update_attribute(:role, 'admin')
   end
 
   def degrade!
-    update_attribute(:role, nil)
+    update_attribute(:role, 'moderator')
   end
 end
