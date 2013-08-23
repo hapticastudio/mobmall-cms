@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130823042449) do
+ActiveRecord::Schema.define(version: 20130823203617) do
 
   create_table "devices", force: true do |t|
     t.string   "token"
@@ -45,6 +45,20 @@ ActiveRecord::Schema.define(version: 20130823042449) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "local_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.text     "name"
+    t.integer  "local_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

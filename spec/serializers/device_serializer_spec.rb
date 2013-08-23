@@ -7,10 +7,10 @@ describe DeviceSerializer do
   end
 
   it "has 1 attribute" do
-    @serializer.attributes.length.should == 1
+    @serializer.serializable_hash.length.should == 1
   end
 
   it "serializes token" do
-    @serializer.attributes.should include(:token)
+    @serializer.serializable_hash.should include(:token)
   end
 end

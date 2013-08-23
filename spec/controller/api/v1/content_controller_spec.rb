@@ -11,6 +11,7 @@ describe Api::V1::ContentController, type: :controller do
       device = FactoryGirl.create(:device)
       local = FactoryGirl.create(:local)
       event = FactoryGirl.create(:event, local: local)
+      tag   = FactoryGirl.create(:tag, locals: [local])
       get :index, id: device.token
 
       expected_json = {
@@ -30,6 +31,11 @@ describe Api::V1::ContentController, type: :controller do
               "begin_time" => event.begin_time, 
               "end_time" => event.end_time
             }
+          ],
+          'tags' => [
+            'id' => tag.id,
+            'name' => tag.name,
+            'local_ids' => [local.id]
           ]
         }
       }
@@ -46,6 +52,10 @@ describe Api::V1::ContentController, type: :controller do
       FactoryGirl.create(:event, updated_at: 2.days.ago)
       FactoryGirl.create(:event, updated_at: 2.days.ago)
       event = FactoryGirl.create(:event, local: local)
+
+      FactoryGirl.create(:tag, updated_at: 2.days.ago)
+      FactoryGirl.create(:tag, updated_at: 2.days.ago)
+      tag = FactoryGirl.create(:tag, locals: [local])
 
       get :index, id: device.token, updated_since: 1.day.ago
 
@@ -66,6 +76,11 @@ describe Api::V1::ContentController, type: :controller do
               "begin_time" => event.begin_time, 
               "end_time" => event.end_time
             }
+          ],
+          'tags' => [
+            'id' => tag.id,
+            'name' => tag.name,
+            'local_ids' => [local.id]
           ]
         }
       }

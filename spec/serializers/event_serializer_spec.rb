@@ -7,27 +7,27 @@ describe EventSerializer do
   end
 
   it "has 5 attributes" do
-    @serializer.attributes.length.should == 5
+    @serializer.serializable_hash.length.should == 5
   end
 
   it "serializes id" do
-    @serializer.attributes.should include(:id)
+    @serializer.serializable_hash.should include(:id)
   end
 
   it "serializes local_id" do
-    @serializer.attributes.should include(:local_id)
+    @serializer.serializable_hash.should include(:local_id)
   end
 
   it "serializes description" do
-    @serializer.attributes.should include(:description)
+    @serializer.serializable_hash.should include(:description)
   end
 
   it "serializes begin_time" do
-    @serializer.attributes.should include(:begin_time)
+    @serializer.serializable_hash.should include(:begin_time)
   end
 
   it "serializes end_time" do
-    @serializer.attributes.should include(:end_time)
+    @serializer.serializable_hash.should include(:end_time)
   end
 
   it "does not include root" do

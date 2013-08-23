@@ -10,7 +10,10 @@ module Api
         events = Event.all
         events = events.updated_since(updated_since) if updated_since
 
-        render json: {content: {places: places, events: events}}
+        tags   = Tag.all
+        tags   = tags.updated_since(updated_since) if updated_since
+
+        render json: {content: {places: places, events: events, tags: tags}}
       end
 
       private

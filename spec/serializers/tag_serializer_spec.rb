@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe EventSerializer do
+describe TagSerializer do
   before(:each) do
-    local = FactoryGirl.create(:local)
-    @serializer = LocalSerializer.new(local)
+    local = FactoryGirl.create(:local, tag_list: "tag")
+    tag = local.tags.first
+    @serializer = TagSerializer.new(tag)
   end
 
   it "has 3 attributes" do
@@ -18,8 +19,8 @@ describe EventSerializer do
     @serializer.serializable_hash.should include(:name)
   end
 
-  it "serializes description" do
-    @serializer.serializable_hash.should include(:description)
+  it "serializes local_ids" do
+    @serializer.serializable_hash.should include(:local_ids)
   end
 
   it "does not include root" do

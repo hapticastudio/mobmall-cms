@@ -6,6 +6,7 @@ describe Local do
 
   it { should belong_to :moderator }
   it { should have_many :events }
+  it { should have_many :tags }
 
   context "moderator email" do
     it "is nil if no mod" do
@@ -17,6 +18,27 @@ describe Local do
       mod = FactoryGirl.build(:user)
       local.moderator = mod
       local.moderator_email.should == mod.email
+    end
+  end
+
+  context "tag_list" do
+    it "creates a string with tag names separated by comma" do
+      local = FactoryGirl.create(:local)
+      tag1  = FactoryGirl.create(:tag, locals: [local])
+      tag2  = FactoryGirl.create(:tag, locals: [local])
+      local.reload.tag_list.should == "#{tag1.name}, #{tag2.name}"
+    end
+  end
+
+  context "tag_list=" do
+    it "creates tags based on string" do
+      local = FactoryGirl.create(:local)
+      local.tag_list = "tag1, tag2"
+      local.save
+      local.tags.count.should == 2
+      names = local.tags.pluck(:name)
+      names.should include("tag1")
+      names.should include("tag2")
     end
   end
 
