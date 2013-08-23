@@ -10,6 +10,7 @@ class Local < ActiveRecord::Base
   belongs_to :moderator, class_name: "User", foreign_key: :user_id
 
   validates :name, presence: true, length: {maximum: 50}
+  validate :validate_tags
 
   delegate :email, to: :moderator, prefix: true, allow_nil: true
   delegate :name, :name=, :description, :description=, to: :content
@@ -31,7 +32,12 @@ class Local < ActiveRecord::Base
 
   private
 
+  def validate_tags
+    errors.add(:tag_list, "can't be longer than 3") if tags.length > 3
+  end
+
   def content
     @content ||= contents.confirmed.last || contents.new(confirmed: true)
   end
 end
+
