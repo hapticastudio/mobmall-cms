@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include UpdatedSinceScope
+  
   belongs_to :local
 
   validates :description, presence: true
@@ -6,8 +8,6 @@ class Event < ActiveRecord::Base
   validates :end_time, presence: true
 
   validate :end_time_is_after_begin_time
-
-  scope :updated_since, ->(updated_since){ where('updated_at > ?', updated_since) }
 
   def as_json(*)
     super(only: [:id, :local_id, :description, :begin_time, :end_time])
