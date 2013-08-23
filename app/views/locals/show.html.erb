@@ -6,6 +6,9 @@
     Description: <%= @local.description.html_safe %>
   </p>
   <p>
+    Tags: <%= @local.tag_list %>
+  </p>
+  <p>
     <%= link_to "Edit", edit_local_path(@local), class: "button expand" %>
   </p>
   <p>
