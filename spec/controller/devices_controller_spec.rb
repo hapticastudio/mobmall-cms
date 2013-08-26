@@ -14,6 +14,7 @@ describe DevicesController, type: :controller do
     end
 
     it "should render :index" do
+      FactoryGirl.create(:device)
       login_as_admin
       get :index
       assert_template :index
