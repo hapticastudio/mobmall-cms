@@ -13,6 +13,7 @@ gem 'sorcery'
 gem 'zurb-foundation'
 gem 'tinymce-rails'
 gem 'active_model_serializers'
+gem 'httparty'
 
 group :production do
   gem 'rails_12factor'
@@ -24,6 +25,7 @@ group :test do
   gem "factory_girl_rails"
   gem "shoulda"
   gem "pry"
+  gem 'webmock'
 end
 
 group :development do

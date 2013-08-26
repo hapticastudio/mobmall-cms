@@ -3,8 +3,13 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'webmock/rspec'
+
+include WebMock::API
 
 include Sorcery::TestHelpers::Rails
+
+ENV['GCM_KEY'] = "test_key"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
