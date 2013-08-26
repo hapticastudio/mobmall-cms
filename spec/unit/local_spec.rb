@@ -8,7 +8,7 @@ describe Local do
   it { should have_many :events }
   it { should have_many :tags }
 
-  it "is allowed to have 3 tags max", focus: true do
+  it "is allowed to have 3 tags max" do
     tag_list = "too, long, tag, list"
     local = FactoryGirl.build(:local, tag_list: tag_list)
     local.valid?.should == false

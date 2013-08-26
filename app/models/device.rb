@@ -4,10 +4,6 @@ class Device < ActiveRecord::Base
   before_create :generate_token
   before_create :generate_last_request_at
 
-  def as_json(*)
-    super(root: true, only: [:token])
-  end
-
   def update_last_request_at!
     update_attributes(last_request_at: time_now)
   end
