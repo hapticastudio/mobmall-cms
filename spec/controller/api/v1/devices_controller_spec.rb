@@ -24,14 +24,14 @@ describe Api::V1::DevicesController, type: :controller do
     it "responds with :unprocessable_entity if errors" do
       device = FactoryGirl.create(:device)
       Device.any_instance.stub(update_attributes: false)
-      patch :update, id: device.token, device: {operating_system: "IOS"}
+      patch :update, id: device.token, device: {operating_system: "ios"}
       json["errors"].should be
       assert_response :unprocessable_entity
     end
 
     it "should respond with :ok on success" do
       device = FactoryGirl.create(:device)
-      patch :update, id: device.token, device: {operating_system: "IOS"}
+      patch :update, id: device.token, device: {operating_system: "ios"}
       assert_response :ok
     end
   end

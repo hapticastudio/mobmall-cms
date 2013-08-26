@@ -1,5 +1,9 @@
 class Device < ActiveRecord::Base
   validates :app_version, presence: true
+  validates :operating_system, inclusion: { in: ["android", "ios", "windows", nil] }
+
+  scope :android,  -> { where(operating_system: "android") }
+  scope :pushable, -> { where('push_token is not null')     }
 
   before_create :generate_token
   before_create :generate_last_request_at

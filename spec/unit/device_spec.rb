@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe Device do
   it { should validate_presence_of :app_version }
+  it { should ensure_inclusion_of(:operating_system).in_array(['android', 'ios', 'windows'])}
+
+  context "pushable" do
+    it "chooses only devices with push token" do
+      FactoryGirl.create(:device)
+      pushable = FactoryGirl.create(:device, push_token: "nonempty")
+      assert_equal [pushable], Device.pushable
+    end
+  end
 
   it "should save token on creation" do
     device = FactoryGirl.create(:device)
