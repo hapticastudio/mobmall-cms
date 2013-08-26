@@ -10,6 +10,6 @@ class NotificationsController < ApplicationController
   private
 
   def pushable_ids
-    Device.android.pushable.pluck(:id)
+    Device.android.pushable.pluck(:push_token)
   end
 end
