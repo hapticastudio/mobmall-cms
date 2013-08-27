@@ -12,7 +12,7 @@ describe Api::V1::ContentController, type: :controller do
       local = FactoryGirl.create(:local)
       event = FactoryGirl.create(:event, local: local)
       tag   = FactoryGirl.create(:tag, locals: [local])
-      get :index, id: device.token
+      get :index, token: device.token
 
       expected_json = {
         'content' => {
@@ -57,7 +57,7 @@ describe Api::V1::ContentController, type: :controller do
       FactoryGirl.create(:tag, updated_at: 2.days.ago)
       tag = FactoryGirl.create(:tag, locals: [local])
 
-      get :index, id: device.token, updated_since: 1.day.ago
+      get :index, token: device.token, updated_since: 1.day.ago
 
       expected_json = {
         'content' => {

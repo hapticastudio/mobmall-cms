@@ -1,18 +1,17 @@
 module Api
   module V1
     class DevicesController < ApplicationController
-      before_filter :authorize, only: :update
-      
       def create
-        device = Device.new(device_params)
-        if device.save
-          render json: device, status: :ok
+        @device = Device.new(device_params)
+        if @device.save
+          render json: @device, status: :ok
         else
-          render json: { errors: device.errors.full_messages }, status: 422
+          render json: { errors: @device.errors.full_messages }, status: 422
         end
       end
 
       def update
+        @device = Device.where(token: id).first
         if @device.update_attributes(device_params)
           head :ok
         else

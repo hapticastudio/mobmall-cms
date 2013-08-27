@@ -3,6 +3,10 @@ module Api
     class ApplicationController < ActionController::Base
       protected
 
+      def id
+        params.permit(:id)[:id]
+      end
+
       def token
         params.permit(:token)[:token]
       end

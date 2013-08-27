@@ -16,11 +16,6 @@ describe Api::V1::DevicesController, type: :controller do
   end
 
   context "update" do
-    it "responds with :forbidden if no device found" do
-      patch :update, id: "invalid_token"
-      assert_response :forbidden
-    end
-
     it "responds with :unprocessable_entity if errors" do
       device = FactoryGirl.create(:device)
       Device.any_instance.stub(update_attributes: false)
