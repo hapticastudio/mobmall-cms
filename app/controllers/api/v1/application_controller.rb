@@ -1,10 +1,10 @@
 module Api
   module V1
     class ApplicationController < ActionController::Base
-      private
+      protected
 
       def token
-        params.permit(:id)[:id]
+        params.permit(:token)[:token]
       end
 
       def authorize
