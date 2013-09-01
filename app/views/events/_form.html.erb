@@ -11,8 +11,17 @@
   <% end %>
 
   <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %>
     <%= f.text_area :description, placeholder: "Description", class: "tinymce" %>
     <%= tinymce %>
+  </p>
+  <p>
+    <%= f.label :short_description %>
+    <%= f.text_field :short_description %>
   </p>
   <p>
     <%= f.label :begin_time %>

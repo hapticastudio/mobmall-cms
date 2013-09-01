@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <td>Name</td>
+    <td>Description</td>
+    <td>Short description</td>
+    <td>From</td>
+    <td>to</td>
+    <td/>
+  </thead>
+  <tbody>
+    <% events.each do |event| %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.description.html_safe %></td>
+        <td><%= event.short_description %></td>
+        <td><%= event.begin_time %></td>
+        <td><%= event.end_time %></td>
+        <td><%= link_to "Edit",  edit_local_event_path(@local, event) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

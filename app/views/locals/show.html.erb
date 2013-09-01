@@ -1,4 +1,4 @@
-<div class="row small-3">
+<div class="row small-6">
   <p>
     Name: <%= @local.name %>
   </p>
@@ -13,25 +13,7 @@
   </p>
   <p>
     All Events:
-    <table>
-      <thead>
-        <td>Description</td>
-        <td>From</td>
-        <td>to</td>
-        <td/>
-      </thead>
-      <tbody>
-        <% @events.each do |event| %>
-          <tr>
-            <td><%= event.description.html_safe %></td>
-            <td><%= event.begin_time %></td>
-            <td><%= event.end_time %></td>
-            <td><%= link_to "Edit",  edit_local_event_path(@local, event) %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
+    <%= render "events/index", events: @events %>
     <%= link_to "New event", new_local_event_path(@local), class: "button expand" %>
   </p>
 </div>

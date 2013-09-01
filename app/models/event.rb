@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   validates :description, presence: true
   validates :begin_time, presence: true
   validates :end_time, presence: true
+  validates :name, presence: true, length: { maximum: 80 }
 
   validate :end_time_is_after_begin_time
 

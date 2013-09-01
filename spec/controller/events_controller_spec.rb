@@ -50,7 +50,7 @@ describe EventsController, type: :controller do
       user = FactoryGirl.create(:user)
       local = FactoryGirl.create(:local, moderator: user)
       login_user(user)
-      post :create, local_id: local.id, event: { description: "something", begin_time: Time.now, end_time: 2.day.from_now }
+      post :create, local_id: local.id, event: FactoryGirl.attributes_for(:event)
       assert_redirected_to local_path(local)
     end
   end
