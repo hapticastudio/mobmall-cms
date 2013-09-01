@@ -2,7 +2,7 @@ class LocalsController < ApplicationController
   before_filter :require_login
   before_filter :require_admin, only: [:index, :new, :create]
   before_filter :require_moderator_or_admin, only: [:show, :edit, :update]
-  
+
   def index
     @locals = Local.all
   end
@@ -21,7 +21,7 @@ class LocalsController < ApplicationController
       redirect_to edit_local_path(@local)
     else
       render :new
-    end  
+    end
   end
 
   def edit

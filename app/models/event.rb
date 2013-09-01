@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   include UpdatedSinceScope
-  
+
   belongs_to :local
 
   validates :description, presence: true

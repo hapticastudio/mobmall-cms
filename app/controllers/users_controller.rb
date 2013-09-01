@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   end
 
   def promote
-    resource.promote! 
+    resource.promote!
     redirect_to users_path
   end
 
   def degrade
-    resource.degrade! 
+    resource.degrade!
     redirect_to users_path
   end
 

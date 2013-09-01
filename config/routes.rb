@@ -29,7 +29,7 @@ MobMall::Application.routes.draw do
       resources :content, only: :index
     end
   end
-  
+
   get "logout" => "sessions#destroy", :as => "logout"
 
   root to: "sessions#new"
