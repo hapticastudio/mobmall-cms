@@ -8,7 +8,8 @@ class LocalsController < ApplicationController
   end
 
   def show
-    @events = @local.events
+    @events          = @local.events
+    @current_content = @local.contents.last
   end
 
   def new

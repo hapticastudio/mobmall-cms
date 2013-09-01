@@ -1,19 +1,28 @@
 <div class="row small-6">
-  <p>
-    Name: <%= @local.name %>
-  </p>
-  <p>
-    Description: <%= @local.description.html_safe %>
-  </p>
-  <p>
+  <h1>Content</h1>
+  <% if @current_content.confirmed? %>
+    <div class="column small-12">
+      <%= render "content", content: @current_content %>
+    </div>
+  <% else %>
+    <div class="column small-6">
+      <h2>Pending:</h2>
+      <%= render "content", content: @current_content %>
+    </div>
+    <div class="column small-6">
+      <h2>Current:</h2>
+      <%= render "content", content: @local %>
+    </div>
+  <% end %>
+  <div class="column small-12">
     Tags: <%= @local.tag_list %>
-  </p>
-  <p>
+  </div>
+  <div>
     <%= link_to "Edit", edit_local_path(@local), class: "button expand" %>
-  </p>
-  <p>
-    All Events:
+  </div>
+  <div>
+    <h1>Events:</h1>
     <%= render "events/index", events: @events %>
     <%= link_to "New event", new_local_event_path(@local), class: "button expand" %>
-  </p>
+  </div>
 </div>
