@@ -11,7 +11,7 @@ module Api
       end
 
       def update
-        @device = Device.where(token: id).first
+        @device = Device.where(token: id).first!
         if @device.update_attributes(device_params)
           head :ok
         else

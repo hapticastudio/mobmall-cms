@@ -24,6 +24,11 @@ describe Api::V1::DevicesController, type: :controller do
       assert_response :unprocessable_entity
     end
 
+    it "responds with :forbidden if fake id passed" do
+      patch :update, id: "fake_id"
+      assert_response :forbidden
+    end
+
     it "should respond with :ok on success" do
       device = FactoryGirl.create(:device)
       patch :update, id: device.token, device: {operating_system: "ios"}
