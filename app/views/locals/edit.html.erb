@@ -10,5 +10,5 @@
         </ul>
       </div>
     <% end %>
-  <%= render partial: "#{current_user.role}_edit", locals: {local: @local} %>
+  <%= render "#{current_user.role}_edit", local: @local %>
 </div>
