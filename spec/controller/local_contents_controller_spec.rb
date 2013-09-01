@@ -34,7 +34,7 @@ describe LocalContentsController, type: :controller do
 
     it "should redirect to index" do
       login_as_admin
-      content = Local::Content.create
+      content = FactoryGirl.create(:local_content)
       patch :confirm, id: content.id
       assert_redirected_to local_contents_path
     end

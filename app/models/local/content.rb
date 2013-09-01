@@ -14,6 +14,7 @@ class Local
 
     def confirm!
       update_attribute(:confirmed, true)
+      local.touch
     end
 
     def reject!
