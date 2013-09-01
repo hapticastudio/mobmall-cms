@@ -21,6 +21,8 @@ MobMall::Application.routes.draw do
   end
 
   resources :devices, only: :index
+  resource :devices, only: :destroy
+
   resources :notifications, only: :create
 
   namespace :api, defaults: { format: "json" } do
