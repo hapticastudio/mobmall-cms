@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :local
 
+  validates :short_description, presence: true
   validates :description, presence: true
   validates :begin_time, presence: true
   validates :end_time, presence: true

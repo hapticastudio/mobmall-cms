@@ -7,7 +7,7 @@ describe EventSerializer do
   end
 
   it "has 5 attributes" do
-    @serializer.serializable_hash.length.should == 5
+    @serializer.serializable_hash.length.should == 7
   end
 
   it "serializes id" do
@@ -20,6 +20,14 @@ describe EventSerializer do
 
   it "serializes description" do
     @serializer.serializable_hash.should include(:description)
+  end
+
+  it "serializes name" do
+    @serializer.serializable_hash.should include(:name)
+  end
+
+  it "serializes short_description" do
+    @serializer.serializable_hash.should include(:short_description)
   end
 
   it "serializes begin_time" do

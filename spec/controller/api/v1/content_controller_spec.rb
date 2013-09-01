@@ -25,11 +25,13 @@ describe Api::V1::ContentController, type: :controller do
           ],
           'events' => [
             {
-              "id" => event.id, 
-              "description" => event.description, 
-              "local_id" => event.local_id, 
-              "begin_time" => event.begin_time, 
-              "end_time" => event.end_time
+              "id" => event.id,
+              "description" => event.description,
+              "local_id" => event.local_id,
+              "begin_time" => event.begin_time,
+              "end_time" => event.end_time,
+              "name" => event.name,
+              "short_description" => event.short_description
             }
           ],
           'tags' => [
@@ -70,11 +72,13 @@ describe Api::V1::ContentController, type: :controller do
           ],
           'events' => [
             {
-              "id" => event.id, 
-              "description" => event.description, 
-              "local_id" => event.local_id, 
-              "begin_time" => event.begin_time, 
-              "end_time" => event.end_time
+              "id" => event.id,
+              "description" => event.description,
+              "local_id" => event.local_id,
+              "begin_time" => event.begin_time,
+              "end_time" => event.end_time,
+              "name" => event.name,
+              "short_description" => event.short_description
             }
           ],
           'tags' => [

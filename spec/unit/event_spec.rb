@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Event do
   it { should belong_to :local }
 
+  it { should validate_presence_of :short_description }
   it { should validate_presence_of :description }
   it { should validate_presence_of :begin_time }
   it { should validate_presence_of :end_time }
   it { should validate_presence_of :name }
   it { should ensure_length_of(:name).is_at_most(80) }
-
 
   it "validates if end time is after begin time" do
     event = Event.new(begin_time: Time.now, end_time: 2.days.ago)
