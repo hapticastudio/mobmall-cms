@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130823203617) do
+ActiveRecord::Schema.define(version: 20130901101331) do
 
   create_table "devices", force: true do |t|
     t.string   "token"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20130823203617) do
     t.datetime "updated_at"
   end
 
+  add_index "events", ["local_id"], name: "index_events_on_local_id", using: :btree
+
   create_table "local_contents", force: true do |t|
     t.string   "name"
     t.integer  "local_id"
@@ -41,11 +43,15 @@ ActiveRecord::Schema.define(version: 20130823203617) do
     t.boolean  "confirmed"
   end
 
+  add_index "local_contents", ["local_id"], name: "index_local_contents_on_local_id", using: :btree
+
   create_table "locals", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "locals", ["user_id"], name: "index_locals_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "local_id"
@@ -54,12 +60,17 @@ ActiveRecord::Schema.define(version: 20130823203617) do
     t.datetime "updated_at"
   end
 
+  add_index "taggings", ["local_id"], name: "index_taggings_on_local_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+
   create_table "tags", force: true do |t|
     t.text     "name"
     t.integer  "local_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tags", ["local_id"], name: "index_tags_on_local_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
