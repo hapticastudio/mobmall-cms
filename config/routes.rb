@@ -22,7 +22,6 @@ MobMall::Application.routes.draw do
   resources :devices, only: :index
   resource :devices, only: :destroy
 
-  resources :notifications, only: :create
 
   namespace :moderator do
     resources :panel, only: :index
@@ -33,6 +32,7 @@ MobMall::Application.routes.draw do
 
   namespace :admin do
     resources :panel, only: :index
+    resources :notifications, only: :create
 
     root to: "panel#index"
   end

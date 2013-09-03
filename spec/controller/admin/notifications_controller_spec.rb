@@ -1,14 +1,8 @@
 require 'spec_helper'
 
-describe NotificationsController, type: :controller do
+describe Admin::NotificationsController, type: :controller do
   context "create" do
     it "should block unauthenticated" do
-      post :create
-      assert_redirected_to root_url
-    end
-
-    it "should block non-admins" do
-      login_as_user
       post :create
       assert_redirected_to root_url
     end
