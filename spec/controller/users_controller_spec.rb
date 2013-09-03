@@ -54,7 +54,7 @@ describe UsersController, type: :controller do
     it "should redirect to panel on success" do
       login_as_admin
       post :create, user: FactoryGirl.attributes_for(:user)
-      assert_redirected_to panel_index_path
+      assert_redirected_to admin_panel_index_path
     end
 
     it "should render :new on failes creation" do
@@ -138,7 +138,7 @@ describe UsersController, type: :controller do
       user = FactoryGirl.create(:user)
       login_user(user)
       patch :update, id: user.id, user: {password: "new", password_confirmation: "new"}
-      assert_redirected_to panel_index_path
+      assert_response :redirect
     end
 
     it "should render new on failed update" do

@@ -17,14 +17,14 @@ describe NotificationsController, type: :controller do
       login_as_admin
       Notifier.any_instance.stub(send!: true)
       post :create
-      assert_redirected_to panel_index_path
+      assert_redirected_to admin_panel_index_path
     end
 
     it "should redirect to panel on fail" do
       login_as_admin
       Notifier.any_instance.stub(send!: false)
       post :create
-      assert_redirected_to panel_index_path
+      assert_redirected_to admin_panel_index_path
     end
   end
 end

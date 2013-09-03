@@ -1,7 +1,6 @@
 MobMall::Application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resource :sessions, only: [:new, :create, :destroy]
-  resources :panel, only: :index
   resources :users, only: [:new, :create, :index, :destroy, :edit, :update] do
     member do
       patch :promote
@@ -24,6 +23,18 @@ MobMall::Application.routes.draw do
   resource :devices, only: :destroy
 
   resources :notifications, only: :create
+
+  namespace :moderator do
+    resources :panel, only: :index
+
+    root to: "panel#index"
+  end
+
+  namespace :admin do
+    resources :panel, only: :index
+
+    root to: "panel#index"
+  end
 
   namespace :api, defaults: { format: "json" } do
     namespace :v1, defaults: { format: "json" } do

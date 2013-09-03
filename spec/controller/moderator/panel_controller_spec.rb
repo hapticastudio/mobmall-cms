@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PanelController, type: :controller do
+describe Moderator::PanelController, type: :controller do
   context "index" do
     it "should block unauthenticated" do
       get :index

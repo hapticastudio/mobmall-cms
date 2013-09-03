@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
     if @user.save
       @user.deliver_reset_password_instructions!
-      redirect_to panel_index_path, notice: "User successfully created"
+      redirect_to admin_panel_index_path, notice: "User successfully created"
     else
       render :new
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
   def update
     if resource.update_attributes(password_params)
-      redirect_to panel_index_path, notice: "Account updated successfully"
+      redirect_to root_path, notice: "Account updated successfully"
     else
       render :edit
     end

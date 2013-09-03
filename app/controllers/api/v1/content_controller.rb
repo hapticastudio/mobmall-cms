@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ContentController < ApplicationController
+    class ContentController < Api::V1::ApplicationController
       before_filter :authorize
 
       def index

@@ -1,6 +1,6 @@
 module Api
   module V1
-    class DevicesController < ApplicationController
+    class DevicesController < Api::V1::ApplicationController
       def create
         @device = Device.new(device_params)
         if @device.save

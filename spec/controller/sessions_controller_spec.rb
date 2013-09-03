@@ -4,13 +4,13 @@ describe SessionsController, type: :controller do
   context "new" do
     it "should render :new unless logged in" do
       get :new
-      assert_template :new 
+      assert_template :new
     end
 
     it "should redirect to panel if user logged in" do
       login_as_user
       get :new
-      assert_redirected_to panel_index_path
+      assert_response :redirect
     end
   end
 
@@ -18,7 +18,7 @@ describe SessionsController, type: :controller do
     it "redirects to panel on success" do
       user = FactoryGirl.create(:user)
       post :create, email: user.email, password: "secret"
-      assert_redirected_to panel_index_path
+      assert_response :redirect
     end
 
     it "renders new on fail" do

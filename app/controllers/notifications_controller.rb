@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
 
   def create
     message = Notifier.new(pushable_ids).send!
-    redirect_to panel_index_path, notice: message
+    redirect_to admin_panel_index_path, notice: message
   end
 
   private
