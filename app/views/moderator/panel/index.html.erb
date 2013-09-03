@@ -1,5 +1,5 @@
 <div class="row small-3">
   <% if current_user.local %>
-    <%= link_to "Manage local", local_path(current_user.local), class: "button expand" %>
+    <%= link_to "Manage local", moderator_local_path(current_user.local), class: "button expand" %>
   <% end %>
 </div>
