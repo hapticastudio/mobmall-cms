@@ -4,6 +4,7 @@
     <thead>
       <td>Name</td>
       <td>Moderator</td>
+      <td>Poi</td>
       <td>Edit</td>
     </thead>
     <tbody>
@@ -11,6 +12,7 @@
         <tr>
           <td><%= local.name %></td>
           <td><%= local.moderator_email %></td>
+          <td><%= local.poi %></td>
           <td><%= link_to "Edit local", edit_local_path(local) %><td>
         </tr>
       <% end %>

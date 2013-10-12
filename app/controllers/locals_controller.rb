@@ -31,7 +31,11 @@ class LocalsController < ApplicationController
 
   def update
     if resource.update_attributes(edit_params)
-      redirect_to local_path(resource)
+      if current_user.admin?
+        redirect_to locals_path
+      else
+        redirect_to moderator_local_path(resource)
+      end
     else
       @possible_moderators = User.moderators if current_user.admin?
       render :edit
@@ -50,7 +54,7 @@ class LocalsController < ApplicationController
 
   def edit_params
     if current_user.admin?
-      params.require(:local).permit(:user_id)
+      params.require(:local).permit(:user_id, :poi)
     else
       params.require(:local).permit(:name, :description, :tag_list)
     end
