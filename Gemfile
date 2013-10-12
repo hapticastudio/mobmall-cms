@@ -13,6 +13,7 @@ gem 'zurb-foundation'
 gem 'tinymce-rails'
 gem 'active_model_serializers'
 gem 'httparty'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'rails_12factor'
