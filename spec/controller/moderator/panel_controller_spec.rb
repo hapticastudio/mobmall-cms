@@ -8,7 +8,10 @@ describe Moderator::PanelController, type: :controller do
     end
 
     it "should render :index" do
-      login_as_user
+      user = FactoryGirl.create(:user)
+      local = FactoryGirl.create(:local, moderator: user)
+      login_user(user)
+
       get :index
       assert_template :index
     end

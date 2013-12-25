@@ -1,4 +1,4 @@
-<%= form_for [local, event] do |f| %>
+<%= form_for [:moderator, local, event] do |f| %>
   <% if event.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>

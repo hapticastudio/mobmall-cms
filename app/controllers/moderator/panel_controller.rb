@@ -1,7 +1,5 @@
 module Moderator
-  class PanelController < ApplicationController
-    before_filter :require_login
-
+  class PanelController < ModeratorController
     def index
     end
   end

@@ -1,8 +1,5 @@
 module Moderator
-    class EventsController < ApplicationController
-      before_filter :require_login
-      before_filter :require_moderator
-
+  class EventsController < ModeratorController
     def new
       @event = local.events.new
     end
@@ -33,10 +30,6 @@ module Moderator
 
     private
 
-    def event_params
-      params.require(:event).permit(:description, :begin_time, :end_time, :name, :short_description)
-    end
-
     def local
       @local ||= Local.where(id: local_id).first
     end
@@ -45,8 +38,8 @@ module Moderator
       params.permit(:local_id)[:local_id]
     end
 
-    def require_moderator
-      not_authorised unless local.moderator == current_user
+    def event_params
+      params.require(:event).permit(:description, :begin_time, :end_time, :name, :short_description)
     end
   end
 end
