@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131012142109) do
 
-  create_table "configurations", force: true do |t|
-    t.string   "event_base_price"
-    t.string   "event_price_per_day"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "devices", force: true do |t|
     t.string   "token"
     t.string   "push_token"
@@ -58,7 +51,6 @@ ActiveRecord::Schema.define(version: 20131012142109) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.text     "logo_data"
     t.integer  "poi"
   end
 

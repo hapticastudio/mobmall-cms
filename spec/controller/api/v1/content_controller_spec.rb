@@ -8,7 +8,8 @@ describe Api::V1::ContentController, type: :controller do
         {
           'id' => @local.id,
           'name' => @local.name,
-          'description' => @local.description
+          'description' => @local.description,
+          'poi' => @local.poi
         }
       ]
       json['content']['events'].should == [

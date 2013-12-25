@@ -7,7 +7,7 @@ describe EventSerializer do
   end
 
   it "has 3 attributes" do
-    @serializer.serializable_hash.length.should == 3
+    @serializer.serializable_hash.length.should == 4
   end
 
   it "serializes id" do
@@ -20,6 +20,10 @@ describe EventSerializer do
 
   it "serializes description" do
     @serializer.serializable_hash.should include(:description)
+  end
+
+  it "serializes poi" do
+    @serializer.serializable_hash.should include(:poi)
   end
 
   it "does not include root" do

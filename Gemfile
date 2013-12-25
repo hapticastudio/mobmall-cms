@@ -34,7 +34,7 @@ group :development do
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use unicorn as the app server
 # gem 'unicorn'
