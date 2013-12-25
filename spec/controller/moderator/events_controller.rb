@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe EventsController, type: :controller do
+describe Moderator::EventsController, type: :controller do
   context "new" do
     it "should block unauthenticated" do
       local = FactoryGirl.create(:local)

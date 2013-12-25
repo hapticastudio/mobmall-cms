@@ -23,6 +23,6 @@
   <div>
     <h1>Events:</h1>
     <%= render "events/index", events: @events %>
-    <%= link_to "New event", new_local_event_path(@local), class: "button expand" %>
+    <%= link_to "New event", new_moderator_local_event_path(@local), class: "button expand" %>
   </div>
 </div>

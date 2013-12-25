@@ -8,9 +8,7 @@ MobMall::Application.routes.draw do
     end
   end
 
-  resources :locals, only: [:index, :new, :create, :edit, :update] do
-    resources :events, only: [:new, :create, :edit, :update]
-  end
+  resources :locals, only: [:index, :new, :create, :edit, :update]
 
   resources :local_contents, only: :index do
     member do
@@ -21,7 +19,9 @@ MobMall::Application.routes.draw do
 
   namespace :moderator do
     resources :panel, only: :index
-    resources :locals, only: [:show]
+    resources :locals, only: [:show] do
+      resources :events, only: [:new, :create, :edit, :update]
+    end
 
     root to: "panel#index"
   end
