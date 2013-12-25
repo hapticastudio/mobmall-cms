@@ -19,10 +19,6 @@ MobMall::Application.routes.draw do
     end
   end
 
-  resources :devices, only: :index
-  resource :devices, only: :destroy
-
-
   namespace :moderator do
     resources :panel, only: :index
     resources :locals, only: [:show]
@@ -33,6 +29,8 @@ MobMall::Application.routes.draw do
   namespace :admin do
     resources :panel, only: :index
     resources :notifications, only: :create
+    resources :devices, only: :index
+    resource :devices, only: :destroy
 
     root to: "panel#index"
   end

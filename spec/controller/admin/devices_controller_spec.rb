@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DevicesController, type: :controller do
+describe Admin::DevicesController, type: :controller do
   context "index" do
     it "should block unauthenticated" do
       get :index
@@ -37,7 +37,7 @@ describe DevicesController, type: :controller do
       FactoryGirl.create(:device)
       login_as_admin
       delete :destroy
-      assert_redirected_to devices_path
+      assert_redirected_to admin_devices_path
     end
   end
 end
