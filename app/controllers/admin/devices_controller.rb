@@ -1,8 +1,5 @@
 module Admin
-  class DevicesController < ApplicationController
-    before_filter :require_login
-    before_filter :require_admin
-
+  class DevicesController < AdminController
     def index
       @devices = Device.all
     end

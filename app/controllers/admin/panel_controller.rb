@@ -1,7 +1,5 @@
 module Admin
-  class PanelController < ApplicationController
-    before_filter :require_login
-
+  class PanelController < AdminController
     def index
     end
   end

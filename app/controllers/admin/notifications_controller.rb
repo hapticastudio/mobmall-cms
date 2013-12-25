@@ -1,8 +1,5 @@
 module Admin
-  class NotificationsController < ApplicationController
-    before_filter :require_login
-    before_filter :require_admin
-
+  class NotificationsController < AdminController
     def create
       message = Notifier.new(pushable_ids).send!
       redirect_to admin_panel_index_path, notice: message

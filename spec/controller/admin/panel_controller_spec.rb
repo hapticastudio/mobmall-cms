@@ -8,7 +8,7 @@ describe Admin::PanelController, type: :controller do
     end
 
     it "should render :index" do
-      login_as_user
+      login_as_admin
       get :index
       assert_template :index
     end
