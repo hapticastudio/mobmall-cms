@@ -26,6 +26,7 @@ group :test do
   gem "shoulda"
   gem "pry"
   gem 'webmock'
+  gem 'simplecov', require: false
 end
 
 group :development do
