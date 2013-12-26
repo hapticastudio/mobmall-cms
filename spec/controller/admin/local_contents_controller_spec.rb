@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe LocalContentsController, type: :controller do
+describe Admin::LocalContentsController, type: :controller do
   context "index" do
     it "should block unauthenticated" do
       get :index
@@ -36,7 +36,7 @@ describe LocalContentsController, type: :controller do
       login_as_admin
       content = FactoryGirl.create(:local_content)
       patch :confirm, id: content.id
-      assert_redirected_to local_contents_path
+      assert_redirected_to admin_local_contents_path
     end
   end
 
@@ -56,7 +56,7 @@ describe LocalContentsController, type: :controller do
       login_as_admin
       content = Local::Content.create
       patch :reject, id: content.id
-      assert_redirected_to local_contents_path
+      assert_redirected_to admin_local_contents_path
     end
   end
 end

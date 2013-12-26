@@ -10,13 +10,6 @@ MobMall::Application.routes.draw do
 
   resources :locals, only: [:index, :new, :create, :edit, :update]
 
-  resources :local_contents, only: :index do
-    member do
-      patch :confirm
-      patch :reject
-    end
-  end
-
   namespace :moderator do
     resources :panel, only: :index
     resources :locals, only: [:show] do
@@ -31,6 +24,13 @@ MobMall::Application.routes.draw do
     resources :notifications, only: :create
     resources :devices, only: :index
     resource :devices, only: :destroy
+
+    resources :local_contents, only: :index do
+      member do
+        patch :confirm
+        patch :reject
+      end
+    end
 
     root to: "panel#index"
   end
