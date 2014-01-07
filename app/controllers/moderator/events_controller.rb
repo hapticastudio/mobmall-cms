@@ -8,7 +8,7 @@ module Moderator
       @event = local.events.new(event_params)
 
       if @event.save
-        redirect_to local_path(local)
+        redirect_to moderator_local_path(local)
       else
         render :new
       end
@@ -22,7 +22,7 @@ module Moderator
       @event = local.events.where(id_params).first
 
       if @event.update_attributes(event_params)
-        redirect_to local_path(local)
+        redirect_to moderator_local_path(local)
       else
         render :edit
       end

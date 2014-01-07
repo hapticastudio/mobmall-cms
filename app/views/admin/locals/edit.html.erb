@@ -1,0 +1,28 @@
+<div class="row small-3">
+  <h1 class="text-center">Edit local</h1>
+  <% if @local.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @local.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_for [:admin, @local] do |f| %>
+    <p>
+      <%= f.label :name %>
+      <%= @local.name %>
+    </p>
+    <p>
+      <%= f.label :moderator %>
+      <%= f.collection_select :user_id, User.moderators, :id, :email, include_blank: "none" %>
+    </p>
+    <p>
+      <%= f.label :poi %>
+      <%= f.number_field :poi %>
+    </p>
+    <%= f.submit nil, class: "button expand" %>
+  <% end %>
+</div>

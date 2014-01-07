@@ -54,13 +54,48 @@ describe Admin::LocalsController, type: :controller do
     it "should redirect to panel on success" do
       login_as_admin
       post :create, local: FactoryGirl.attributes_for(:local)
-      assert_redirected_to edit_local_path(Local.last)
+      assert_redirected_to edit_admin_local_path(Local.last)
     end
 
     it "should render :new on failed creation" do
       login_as_admin
       post :create, local: {name: ""}
       assert_template :new
+    end
+  end
+
+  context "edit" do
+    it "should block unauthenticated" do
+      get :edit, id: 1
+      assert_redirected_to root_url
+    end
+
+    it "should allow admins" do
+      login_as_admin
+      get :edit, id: FactoryGirl.create(:local).id
+      assert_template :edit
+    end
+  end
+
+  context "update" do
+    it "should block unauthenticated" do
+      patch :update, id: 1
+      assert_redirected_to root_url
+    end
+
+    it "should redirect to admin_locals_path on success" do
+      login_as_admin
+      local = FactoryGirl.create(:local)
+      patch :update, id: local.id, local: {name: "New name", description: "New description"}
+      assert_redirected_to admin_locals_path
+    end
+
+    it "should render :edit on failed update" do
+      login_as_admin
+      local = FactoryGirl.create(:local)
+      Local.any_instance.stub(update_attributes: false)
+      patch :update, id: local.id, local: {poi: ""}
+      assert_template :edit
     end
   end
 end

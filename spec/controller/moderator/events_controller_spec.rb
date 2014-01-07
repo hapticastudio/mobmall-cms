@@ -51,7 +51,7 @@ describe Moderator::EventsController, type: :controller do
       local = FactoryGirl.create(:local, moderator: user)
       login_user(user)
       post :create, local_id: local.id, event: FactoryGirl.attributes_for(:event)
-      assert_redirected_to local_path(local)
+      assert_redirected_to moderator_local_path(local)
     end
   end
 
@@ -110,7 +110,7 @@ describe Moderator::EventsController, type: :controller do
       event = FactoryGirl.create(:event, local: local)
       login_user(user)
       post :update, local_id: local.id, id: event.id, event: { description: "something", begin_time: Time.now, end_time: 2.day.from_now }
-      assert_redirected_to local_path(local)
+      assert_redirected_to moderator_local_path(local)
     end
   end
 end
