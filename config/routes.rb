@@ -1,12 +1,7 @@
 MobMall::Application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resource :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :index, :destroy, :edit, :update] do
-    member do
-      patch :promote
-      patch :degrade
-    end
-  end
+  resources :users, only: [:edit, :update]
 
   resources :locals, only: [:index, :new, :create, :edit, :update]
 
@@ -29,6 +24,13 @@ MobMall::Application.routes.draw do
       member do
         patch :confirm
         patch :reject
+      end
+    end
+
+    resources :users, only: [:new, :create, :index, :destroy] do
+      member do
+        patch :promote
+        patch :degrade
       end
     end
 

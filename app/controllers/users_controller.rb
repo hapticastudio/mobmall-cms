@@ -1,36 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_login
-  before_filter :require_admin, except: [:edit, :update]
-  before_filter :require_matching_users, only: [:edit, :update]
-
-  def index
-    @users = User.ordered
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      @user.deliver_reset_password_instructions!
-      redirect_to admin_panel_index_path, notice: "User successfully created"
-    else
-      render :new
-    end
-  end
-
-  def promote
-    resource.promote!
-    redirect_to users_path
-  end
-
-  def degrade
-    resource.degrade!
-    redirect_to users_path
-  end
+  before_filter :require_matching_users
 
   def edit
   end
@@ -43,19 +13,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    resource.destroy if resource
-    redirect_to users_path, notice: "User #{resource.email} successfully removed"
-  end
-
   private
 
   def resource
     @user ||= User.where(id_params).first
-  end
-
-  def user_params
-    params.require(:user).permit(:email)
   end
 
   def password_params

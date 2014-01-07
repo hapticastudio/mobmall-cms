@@ -14,9 +14,9 @@
           <% unless user == current_user %>
             <td>
               <% if user.admin? %>
-                <%= button_to "Degrade", degrade_user_path(user), method: :patch, class: "button alert" %>
+                <%= button_to "Degrade", admin_degrade_user_path(user), method: :patch, class: "button alert" %>
               <% else %>
-                <%= button_to "Promote", promote_user_path(user), method: :patch, class: "button success" %>
+                <%= button_to "Promote", admin_promote_user_path(user), method: :patch, class: "button success" %>
               <% end %>
             </td>
             <td>
