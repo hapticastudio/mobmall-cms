@@ -1,6 +1,6 @@
 <div class="row small-3">
   <h1 class="text-center">Create new local</h1>
-  <%= form_for @local do |f| %>
+  <%= form_for [:admin, @local] do |f| %>
     <% if @local.errors.any? %>
       <div class="error_messages">
         <h2>Form is invalid</h2>

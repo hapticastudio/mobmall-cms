@@ -1,8 +1,8 @@
 <div class="row small-3">
   <%= link_to "New user", new_admin_user_path, class: "button expand" %>
   <%= link_to "Users list", admin_users_path, class: "button expand" %>
-  <%= link_to "New local", new_local_path, class: "button expand" %>
-  <%= link_to "Locals list", locals_path, class: "button expand" %>
+  <%= link_to "New local", new_admin_local_path, class: "button expand" %>
+  <%= link_to "Locals list", admin_locals_path, class: "button expand" %>
   <%= link_to "Unconfirmed local data", admin_local_contents_path, class: "button expand" %>
   <%= link_to "Registered devices", admin_devices_path, class: "button expand" %>
   <%= button_to "Send notifications!", admin_notifications_path, class: "button expand alert" %>

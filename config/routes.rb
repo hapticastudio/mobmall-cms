@@ -3,7 +3,7 @@ MobMall::Application.routes.draw do
   resource :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:edit, :update]
 
-  resources :locals, only: [:index, :new, :create, :edit, :update]
+  resources :locals, only: [:edit, :update]
 
   namespace :moderator do
     resources :panel, only: :index
@@ -19,6 +19,7 @@ MobMall::Application.routes.draw do
     resources :notifications, only: :create
     resources :devices, only: :index
     resource :devices, only: :destroy
+    resources :locals, only: [:index, :new, :create]
 
     resources :local_contents, only: :index do
       member do

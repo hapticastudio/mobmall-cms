@@ -1,29 +1,6 @@
 class LocalsController < ApplicationController
   before_filter :require_login
-  before_filter :require_admin, only: [:index, :new, :create]
-  before_filter :require_moderator_or_admin, only: [:show, :edit, :update]
-
-  def index
-    @locals = Local.all
-  end
-
-  def show
-    @events          = @local.events
-    @current_content = @local.contents.last
-  end
-
-  def new
-    @local = Local.new
-  end
-
-  def create
-    @local = Local.new(local_params)
-    if @local.save
-      redirect_to edit_local_path(@local)
-    else
-      render :new
-    end
-  end
+  before_filter :require_moderator_or_admin, only: [:edit, :update]
 
   def edit
     @possible_moderators = User.moderators if current_user.admin?
