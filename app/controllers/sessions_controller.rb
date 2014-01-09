@@ -21,6 +21,10 @@ class SessionsController < ApplicationController
   private
 
   def path_params
-    {controller: "#{current_user.role}/panel", action: "index"}
+    if current_user.admin?
+      admin_panel_index_path
+    else
+      moderator_local_path
+    end
   end
 end

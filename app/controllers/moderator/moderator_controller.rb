@@ -6,11 +6,11 @@ module Moderator
     private
 
     def local
-      @local ||= Local.where(id_params).first
+      @local ||= current_user.local
     end
 
     def require_moderator
-      not_authorised unless local.moderator == current_user
+      not_authorised unless current_user.moderator? and local
     end
   end
 end

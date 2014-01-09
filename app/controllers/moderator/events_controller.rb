@@ -22,21 +22,13 @@ module Moderator
       @event = local.events.where(id_params).first
 
       if @event.update_attributes(event_params)
-        redirect_to moderator_local_path(local)
+        redirect_to moderator_local_path
       else
         render :edit
       end
     end
 
     private
-
-    def local
-      @local ||= Local.where(id: local_id).first
-    end
-
-    def local_id
-      params.permit(:local_id)[:local_id]
-    end
 
     def event_params
       params.require(:event).permit(:description, :begin_time, :end_time, :name, :short_description)

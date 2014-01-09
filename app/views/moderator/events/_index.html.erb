@@ -15,7 +15,7 @@
         <td><%= event.short_description %></td>
         <td><%= event.begin_time %></td>
         <td><%= event.end_time %></td>
-        <td><%= link_to "Edit",  edit_moderator_local_event_path(@local, event) %>
+        <td><%= link_to "Edit",  edit_moderator_local_event_path(event) %>
       </tr>
     <% end %>
   </tbody>

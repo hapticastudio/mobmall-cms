@@ -1,4 +1,4 @@
-<%= form_for [:moderator, local, event] do |f| %>
+<%= form_for [:moderator, :local, event], url: moderator_local_event_path(event) do |f| %>
   <% if event.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>

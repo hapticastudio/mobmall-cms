@@ -4,12 +4,11 @@ MobMall::Application.routes.draw do
   resources :users, only: [:edit, :update]
 
   namespace :moderator do
-    resources :panel, only: :index
-    resources :locals, only: [:show, :edit, :update] do
+    resource :local, only: [:show, :edit, :update] do
       resources :events, only: [:new, :create, :edit, :update]
     end
 
-    root to: "panel#index"
+    root to: "locals#show"
   end
 
   namespace :admin do

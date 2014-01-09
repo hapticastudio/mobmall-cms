@@ -6,12 +6,11 @@ module Moderator
     end
 
     def edit
-      local
     end
 
     def update
-      if resource.update_attributes(edit_params)
-        redirect_to moderator_local_path(resource)
+      if local.update_attributes(edit_params)
+        redirect_to moderator_local_path
       else
         render :edit
       end

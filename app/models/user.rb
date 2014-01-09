@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
+  def moderator?
+    role == "moderator"
+  end
+
   def password_present?
     crypted_password.present?
   end

@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <p>
-    <%= form_for [:moderator, @local] do |f| %>
+    <%= form_for @local, url: moderator_local_path do |f| %>
       <p>
         <%= f.label :name %>
         <%= f.text_field :name, placeholder: "Name" %>
