@@ -21,7 +21,7 @@
             </td>
             <td>
               <% if user.local %>
-                <%= link_to user.local.name, edit_local_path(user.local) %>
+                <%= link_to user.local.name, edit_admin_local_path(user.local) %>
               <% end %>
             </td>
             <td><%= button_to "Delete", user_path(user), method: :delete, class: "button alert", data: {confirm: "Are you sure you want to remove #{user.email} account?"} %></td>

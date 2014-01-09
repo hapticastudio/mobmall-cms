@@ -20,7 +20,7 @@ describe Admin::UsersController, type: :controller do
     end
 
     it "should render :index and render moderator" do
-      FactoryGirl.create(:user)
+      FactoryGirl.create(:local, moderator: FactoryGirl.create(:user))
       login_as_admin
       get :index
       assert_template :index
