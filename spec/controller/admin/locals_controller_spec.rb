@@ -18,6 +18,13 @@ describe Admin::LocalsController, type: :controller do
       get :index
       assert_template :index
     end
+
+    it "should render :index with local" do
+      FactoryGirl.create(:local)
+      login_as_admin
+      get :index
+      assert_template :index
+    end
   end
 
   context "new" do

@@ -18,6 +18,20 @@ describe Admin::UsersController, type: :controller do
       get :index
       assert_template :index
     end
+
+    it "should render :index and render moderator" do
+      FactoryGirl.create(:user)
+      login_as_admin
+      get :index
+      assert_template :index
+    end
+
+    it "should render :index and render admin" do
+      FactoryGirl.create(:admin)
+      login_as_admin
+      get :index
+      assert_template :index
+    end
   end
 
   context "new" do
